@@ -1,0 +1,51 @@
+2023-03-14 20:19:59 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:20:02 [DEBUG] util.logger authenticate.py:56: employees authorization info : 120ab51e-719a-4596-b6f0-f4a04a76305b | Identifier : 440ac3b4-4f12-48cd-85c8-3fe4821eac61 | Device ID : d0f89d39-57e0-4bbd-a4f3-5022b98ca8ab
+2023-03-14 20:20:02 [WARNING] django.request log.py:241: Unauthorized: /employees/apis/test/token/
+2023-03-14 20:20:50 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\middleware\authenticate.py changed, reloading.
+2023-03-14 20:20:50 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:21:39 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:21:39 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:22:43 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:22:44 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:24:47 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_token_api.py changed, reloading.
+2023-03-14 20:24:47 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:25:17 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_token_api.py changed, reloading.
+2023-03-14 20:25:17 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:26:41 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:26:42 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:26:46 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:26:47 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:27:16 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_token_api.py changed, reloading.
+2023-03-14 20:27:16 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:27:37 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_token_api.py changed, reloading.
+2023-03-14 20:27:37 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:28:02 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_token_api.py changed, reloading.
+2023-03-14 20:28:03 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:28:19 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_token_api.py changed, reloading.
+2023-03-14 20:28:19 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:30:26 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\lens35\constanst.py changed, reloading.
+2023-03-14 20:30:27 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:31:07 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\lens35\constanst.py changed, reloading.
+2023-03-14 20:31:08 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:31:26 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:31:26 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:31:29 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:31:30 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:31:46 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:31:47 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:33:17 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\lens35\constanst.py changed, reloading.
+2023-03-14 20:33:18 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:33:31 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\lens35\constanst.py changed, reloading.
+2023-03-14 20:33:32 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:33:45 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:33:46 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:33:59 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\customers\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:34:00 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:37:42 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\lens35\constanst.py changed, reloading.
+2023-03-14 20:37:42 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:38:17 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:38:17 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:38:36 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\apps\employees\apis\generate_otp_api.py changed, reloading.
+2023-03-14 20:38:36 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
+2023-03-14 20:38:47 [INFO] django.utils.autoreload autoreload.py:266: C:\aravind\lens35\lens35\constanst.py changed, reloading.
+2023-03-14 20:38:47 [INFO] django.utils.autoreload autoreload.py:677: Watching for file changes with StatReloader
