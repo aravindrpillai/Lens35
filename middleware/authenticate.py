@@ -1,4 +1,3 @@
-#from apps.employees.helpers.authentication_helper import authenticate_api_request as auth_employee_token
 from apps.customers.models.customer_token import CustomerToken
 from apps.employees.models.employee_token import EmployeeToken
 from lens35.constanst import TOKEN_EXPIRY_TIME_IN_MINUTES

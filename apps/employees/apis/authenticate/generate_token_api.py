@@ -1,8 +1,8 @@
 from util.regex import validate_and_format_mobile_number, validate_and_format_otp, validate_and_format_bool, validate_and_format_uuid4
-from apps.customers.models.customer_token import CustomerToken
-from apps.customers.models.customer_otp import CustomerOTP
+from apps.employees.models.employee_token import EmployeeToken
+from apps.employees.models.employee_otp import EmployeeOTP
 from lens35.constanst import SMS_OTP_EXPIRY_IN_MINUTES
-from apps.customers.models.customers import Customers
+from apps.employees.models.employees import Employees
 from util.http import build_response, get_client_ip
 from rest_framework.decorators import api_view
 from django.utils import timezone
@@ -19,26 +19,27 @@ def index(request):
     try:
         data = request.data
         otp = validate_and_format_otp(data.get("otp", None))
+        print(otp)
         mobile_number = validate_and_format_mobile_number(request.data.get("mobile_number", None))
         
         # Define the time range
         now = timezone.now()
         expiry_time_delta = now - timedelta(minutes=SMS_OTP_EXPIRY_IN_MINUTES)
-        otp_exist = CustomerOTP.objects.filter(mobile_number=mobile_number, otp=otp, generated_time__gte=expiry_time_delta).exists()
+        otp_exist = EmployeeOTP.objects.filter(mobile_number=mobile_number, otp=otp, generated_time__gte=expiry_time_delta).exists()
         if(otp_exist):
-            for otp in CustomerOTP.objects.filter(mobile_number=mobile_number):
+            for otp in EmployeeOTP.objects.filter(mobile_number=mobile_number):
                 otp.delete()
-            customer_id = create_user_if_not_exist(mobile_number)
+            employee_id = create_user_if_not_exist(mobile_number)
             ip_address = get_client_ip(request)
             device_id = validate_and_format_uuid4("device_id", data.get("device_id", None), True)
             keep_active = False if device_id == None else validate_and_format_bool("keep_active",data.get("keep_active", False))
-            token = commit_token_data(customer_id, device_id, mobile_number, ip_address, keep_active)
+            token = commit_token_data(employee_id, device_id, mobile_number, ip_address, keep_active)
             
             #Building the response
             response = {
                 "Token" : token.token,
                 "Device-Id":token.device_id,
-                "Identifier":token.customer_id
+                "Identifier":token.employee_id
             }
             return build_response(202, None, response)            
         else:
@@ -51,15 +52,15 @@ def index(request):
 '''
 #Function to commit token data
 '''
-def commit_token_data(customer_id, device_id, mobile_number, ip_address, keep_active):
+def commit_token_data(employee_id, device_id, mobile_number, ip_address, keep_active):
     try:
-        tokens = CustomerToken.objects.filter(mobile_number= mobile_number, device_id = device_id)
+        tokens = EmployeeToken.objects.filter(mobile_number= mobile_number, device_id = device_id)
         for token in tokens:
             token.delete()
-        tk = CustomerToken()
+        tk = EmployeeToken()
         tk.mobile_number = mobile_number
         tk.device_id = uuid.uuid4() if (device_id == None) else device_id
-        tk.customer_id = customer_id
+        tk.employee_id = employee_id
         tk.token = uuid.uuid4()
         tk.ip_address = ip_address
         tk.keep_active = keep_active
@@ -75,12 +76,12 @@ def commit_token_data(customer_id, device_id, mobile_number, ip_address, keep_ac
 '''
 def create_user_if_not_exist(mobile_number):
     try:
-        cust = Customers.objects.get(mobile_number = mobile_number)
-        return cust.customer_id
+        emp = Employees.objects.get(mobile_number = mobile_number)
+        return emp.employee_id
     except:
         logger.debug("Creating new Employee record")
-        cust = Customers()
-        cust.customer_id = uuid.uuid4()
-        cust.mobile_number = mobile_number
-        cust.save()
-        return cust.customer_id
+        emp = Employees()
+        emp.employee_id = uuid.uuid4()
+        emp.mobile_number = mobile_number
+        emp.save()
+        return emp.employee_id

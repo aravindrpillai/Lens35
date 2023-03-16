@@ -8,6 +8,11 @@ def validate_and_format_mobile_number(mob_number):
     else:
         raise Exception("Invalid Mobile Number")
 
+def validate_and_format_pincode(pincode):
+    if pincode.isdigit() and len(pincode) == 6:
+        return pincode
+    else:
+        raise Exception("Invalid Pincode")
 
 def validate_and_format_otp(otp):
     if(otp == None or otp == ""):
@@ -29,16 +34,22 @@ def validate_and_format_uuid4(field_name, uuid_value, supress_error=False):
     except:
         raise Exception("Device id must be a valid UUID4 (or null)")
 
-def validate_and_format_bool(str_name, str_value):
+def validate_and_format_bool(str_name, str_value, supress_error = False, default_value_when_error_supressed=False):
     if(type(str_value) is bool):
         return str_value
     if(str_value == "" or str_value == None):
-        raise Exception("{} is Empty".format(str_name))
+        if(supress_error):
+            return default_value_when_error_supressed
+        else:
+            raise Exception("{} is Empty".format(str_name))
     if(str_value == "1" or str_value.lower() == "true"):
         return True
     if(str_value == "0" or str_value.lower() == "false"):
         return False
-    raise Exception("value of {} is not boolean.".format(str_name))
+    if(supress_error):
+        return default_value_when_error_supressed
+    else:
+        raise Exception("value of {} is not boolean.".format(str_name))
 
 def validate_and_format_str(str_name, str_value):
     if(str_value == "" or str_value == None):

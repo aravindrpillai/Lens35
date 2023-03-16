@@ -1,11 +1,8 @@
 import boto3
-from enums.constants import CONSTANTS
+from lens35.constanst import WASABI_ENDPOINT, WASABI_ACCESS_KEY, WASABI_ACCESS_SECRET
 
 def __get_s3_client():
-    return boto3.client('s3',
-    endpoint_url = CONSTANTS.WASABI_ENDPOINT.value,
-    aws_access_key_id = CONSTANTS.WASABI_ACCESS_KEY.value,
-    aws_secret_access_key = CONSTANTS.WASABI_ACCESS_SECRET.value)
+    return boto3.client('s3', endpoint_url = WASABI_ENDPOINT, aws_access_key_id = WASABI_ACCESS_KEY, aws_secret_access_key = WASABI_ACCESS_SECRET)
     
 
 def get_presigned_url_to_push_object(bucket_name, folder_name, file_name, url_valid_for=600):

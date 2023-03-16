@@ -4,6 +4,8 @@ class Employees(models.Model):
     employee_id = models.UUIDField(unique=True)
     full_name = models.CharField(max_length=100, null=True)
     mobile_number = models.CharField(max_length=10, null=False, unique=True)
+    
+    profile_name = models.CharField(max_length=50, null=True, unique=True)
 
     email_id = models.EmailField(null=True, unique=True)
     email_id_verified = models.BooleanField(default=False)
@@ -11,10 +13,10 @@ class Employees(models.Model):
     subscribe_for_updates = models.BooleanField(default=True)
     profile_approved = models.BooleanField(default=False)
 
-    display_picture = models.UUIDField(max_length=100, null=True, unique=True)
+    display_picture = models.CharField(max_length=50, null=True, unique=True)
     id_proof_type = models.CharField(max_length=15, null=True, choices=(('A', 'Aadhar'), ('P', 'Passport'), ('D', 'DrivingLicence'),('V', 'VotersID')))
-    id_proof_front = models.UUIDField(max_length=100, null=True, unique=True)
-    id_proof_back = models.UUIDField(max_length=100, null=True, unique=True)
+    id_proof_front = models.CharField(max_length=50, null=True, unique=True)
+    id_proof_back = models.CharField(max_length=50, null=True, unique=True)
     
     base_location_pincode = models.CharField(max_length=6, null=True)
     base_location_city = models.CharField(max_length=100, null=True)

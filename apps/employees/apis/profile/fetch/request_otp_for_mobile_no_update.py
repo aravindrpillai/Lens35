@@ -1,6 +1,7 @@
 from lens35.constanst import SMS_OTP_LIMIT_PER_SESSION, SMS_RESEND_TIME_LIMIT_IN_MINUTES
 from apps.employees.models.employee_otp import EmployeeOTP
 from util.regex import validate_and_format_mobile_number
+from apps.employees.models.employees import Employees
 from rest_framework.decorators import api_view
 from util.http import build_response
 from django.utils import timezone
@@ -8,17 +9,27 @@ from util.logger import logger
 from random import randrange
 import traceback
 
-
 @api_view(['POST'])
 def index(request):
     try:
         mobile_number = validate_and_format_mobile_number(request.data.get("mobile_number", None))
         if(__is_request_within_limit(mobile_number=mobile_number)):
-            otp = randrange(100001, 999999)
-            __save_otp_info(mobile_number=mobile_number, otp=otp)
+            employee_id = request.headers.get("Identifier")
+            employee = Employees.objects.filter(mobile_number = mobile_number)
+            if(not employee.exists()):
+                otp = randrange(100001, 999999)
+                __save_otp_info(mobile_number=mobile_number, otp=otp)
+            else:
+                employee = employee[0]
+                print(employee.employee_id)
+                print(employee_id)
+                if(str(employee.employee_id) == str(employee_id)):
+                    return build_response(417, "Same Mobile Number", None)    
+                else:
+                    return build_response(409, "Mobile Number already used", None)    
         else:
-            return build_response(400, "OTP Limit Exceeded. Please try again after sometime")
-        return build_response(200, None, {"otp_for_testing_purpose": otp}) #TODO - Remove sending OTP Back || Kept for testing
+            return build_response(429, "OTP Limit Exceeded. Please try again after sometime")
+        return build_response(201, None, {"otp_for_testing_purpose": otp}) #TODO - Remove sending OTP Back || Kept for testing
     except Exception as e_0:
         logger.error('%s\n%s', e_0, traceback.format_exc())
         return build_response(400, str(e_0))
@@ -31,7 +42,6 @@ def __is_request_within_limit(mobile_number):
         generated_time__gt = (timezone.now() - timezone.timedelta(minutes=SMS_RESEND_TIME_LIMIT_IN_MINUTES))
     ).count()
     return True if (records_count <= SMS_OTP_LIMIT_PER_SESSION) else False
-
 
 def __save_otp_info(mobile_number, otp):
     emp_otp = EmployeeOTP()
