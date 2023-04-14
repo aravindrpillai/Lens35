@@ -44,7 +44,7 @@ def index(request):
             if(emp.exists()):
                 raise Exception("This Email ID is already used")
             else:
-                send_email("email_verification_template", {"employee_id":employee_id}, email_id)
+                #send_email("email_verification_template", {"employee_id":employee_id}, email_id)
                 employee.email_id = email_id
                 employee.email_id_verified = False
                 updated = True
@@ -68,5 +68,5 @@ def index(request):
         return build_response(202, message , response)
     
     except Exception as e_0:
-        logger.error('Failed to update employee basic info %s - %s\n%s', employee_id, e_0, traceback.format_exc())
+        logger.error('Failed to update employee basic info : {} - {}\n{}'.format(employee_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))

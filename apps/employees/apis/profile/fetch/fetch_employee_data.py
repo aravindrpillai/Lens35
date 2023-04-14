@@ -34,7 +34,7 @@ def index(request):
         }
         return build_response(200, "Success", resp)
     except Exception as e_0:
-        logger.error('Failed to fetch Employee information %s - %s\n%s', employee_id, e_0, traceback.format_exc())
+        logger.error('Failed to fetch Employee information : {} - {}\n{}'.format(employee_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))
 
 
@@ -46,5 +46,5 @@ def __get_file_url(file_name, type):
         return None
     else:
         folder = EMPLOYEES_DP_FOLDER if (type == "display_picture") else EMPLOYEES_ID_PROOF_FOLDER
-        url = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, folder.value, file_name)
+        url = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, folder, file_name)
         return url

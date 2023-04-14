@@ -36,9 +36,8 @@ class Authenticate():
             if(excluded_url in full_path):
                 return self.get_response(request)
         
-        usertype = full_path.replace("https://", "").replace("http://", "").split('/')[1]
-        usertype = usertype.lower()
-        
+        url_segments = full_path.replace("https://", "").replace("http://", "").split('/')
+        usertype = (url_segments[1] if(url_segments[1] != "bookings") else url_segments[3]).lower()
         headers = request.headers
         token = headers.get('Token', None)
         identifier = headers.get('Identifier', None)
@@ -83,5 +82,5 @@ class Authenticate():
             else:
                 return False
         except Exception as e:        
-            logger.error('%s\n%s', e, traceback.format_exc())
+            logger.error('Failed to authenticate [in middleware] : {}\n{}'.format(e, traceback.format_exc()))
             return False

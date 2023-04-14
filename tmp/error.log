@@ -1,260 +1,119 @@
-2023-03-16 10:40:15 [ERROR] util.logger generate_otp_api.py:23: Failed to push OTP Invalid Mobile Number
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_otp_api.py", line 15, in index
-    mobile_number = validate_and_format_mobile_number(request.data.get("mobile_number", None))
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 9, in validate_and_format_mobile_number
-    raise Exception("Invalid Mobile Number")
-Exception: Invalid Mobile Number
-
-2023-03-16 10:41:06 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+2023-03-21 13:32:50 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
 Traceback (most recent call last):
   File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
-    otp = validate_and_format_otp(data.get("otp", None))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 18, in validate_and_format_otp
-    raise Exception("Invalid OTP")
-Exception: Invalid OTP
-
-2023-03-16 12:45:39 [ERROR] util.logger basic_info.py:71: Failed to update employee basic info c577aff1-b951-404d-84a9-8739a4c43917 - profile name must not contain symbols or spaces
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\basic_info.py", line 35, in index
-    raise Exception("profile name must not contain symbols or spaces")
-Exception: profile name must not contain symbols or spaces
-
-2023-03-16 12:45:52 [ERROR] util.logger basic_info.py:71: Failed to update employee basic info c577aff1-b951-404d-84a9-8739a4c43917 - Imvalid Email ID
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\basic_info.py", line 42, in index
-    email_id = validate_and_format_email_id(email_id)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 54, in validate_and_format_email_id
-    raise Exception("Imvalid Email ID")
-Exception: Imvalid Email ID
-
-2023-03-16 12:45:58 [ERROR] util.logger basic_info.py:71: Failed to update employee basic info c577aff1-b951-404d-84a9-8739a4c43917 - JSON parse error - Expecting value: line 6 column 1 (char 162)
-Traceback (most recent call last):
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\parsers.py", line 64, in parse
-    return json.load(decoded_stream, parse_constant=parse_constant)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\utils\json.py", line 31, in load
-    return json.load(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
-    return loads(fp.read(),
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 359, in loads
-    return cls(**kw).decode(s)
-           ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 355, in raw_decode
-    raise JSONDecodeError("Expecting value", s, err.value) from None
-json.decoder.JSONDecodeError: Expecting value: line 6 column 1 (char 162)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\basic_info.py", line 14, in index
-    data = request.data
-           ^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\request.py", line 216, in data
-    self._load_data_and_files()
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\request.py", line 279, in _load_data_and_files
-    self._data, self._files = self._parse()
-                              ^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\request.py", line 354, in _parse
-    parsed = parser.parse(stream, media_type, self.parser_context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\parsers.py", line 66, in parse
-    raise ParseError('JSON parse error - %s' % str(exc))
-rest_framework.exceptions.ParseError: JSON parse error - Expecting value: line 6 column 1 (char 162)
-
-2023-03-16 12:49:30 [ERROR] util.logger generate_token_api.py:47: Failed : expected string or bytes-like object, got 'int'
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
-    otp = validate_and_format_otp(data.get("otp", None))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 15, in validate_and_format_otp
-    if(re.findall("^[2-9]{1}[0-9]{5}$", otp)):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\re\__init__.py", line 216, in findall
-    return _compile(pattern, flags).findall(string)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: expected string or bytes-like object, got 'int'
-
-2023-03-16 12:54:12 [ERROR] util.logger generate_token_api.py:47: Failed : Device id must be a valid UUID4 (or null)
-Traceback (most recent call last):
-  File "C:\aravind\lens35\util\regex.py", line 28, in validate_and_format_uuid4
-    return UUID(uuid_value, version=4)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\uuid.py", line 178, in __init__
-    raise ValueError('badly formed hexadecimal UUID string')
-ValueError: badly formed hexadecimal UUID string
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 33, in index
-    device_id = validate_and_format_uuid4("device_id", data.get("device_id", None), True)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 30, in validate_and_format_uuid4
-    raise Exception("Device id must be a valid UUID4 (or null)")
-Exception: Device id must be a valid UUID4 (or null)
-
-2023-03-16 13:16:12 [ERROR] util.logger services.py:41: Failed to update services for employee c577aff1-b951-404d-84a9-8739a4c43917 - value of is_photo_editor is not boolean.
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\services.py", line 18, in index
-    is_photo_editor = validate_and_format_bool("is_photo_editor",data.get("is_photo_editor", None))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 47, in validate_and_format_bool
-    raise Exception("value of {} is not boolean.".format(str_name))
-Exception: value of is_photo_editor is not boolean.
-
-2023-03-16 13:16:28 [ERROR] util.logger services.py:41: Failed to update services for employee c577aff1-b951-404d-84a9-8739a4c43917 - is_photo_editor is Empty
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\services.py", line 18, in index
-    is_photo_editor = validate_and_format_bool("is_photo_editor",data.get("is_photo_editor", None))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 39, in validate_and_format_bool
-    raise Exception("{} is Empty".format(str_name))
-Exception: is_photo_editor is Empty
-
-2023-03-16 13:16:55 [ERROR] util.logger services.py:41: Failed to update services for employee c577aff1-b951-404d-84a9-8739a4c43917 - Atlease one service must be added
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\services.py", line 22, in index
-    raise Exception("Atlease one service must be added")
-Exception: Atlease one service must be added
-
-2023-03-16 13:42:55 [ERROR] util.logger portfolios.py:23: Failed to update employee base location c577aff1-b951-404d-84a9-8739a4c43917 - JSON parse error - Expecting ',' delimiter: line 8 column 19 (char 170)
-Traceback (most recent call last):
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\parsers.py", line 64, in parse
-    return json.load(decoded_stream, parse_constant=parse_constant)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\utils\json.py", line 31, in load
-    return json.load(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 293, in load
-    return loads(fp.read(),
-           ^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 359, in loads
-    return cls(**kw).decode(s)
-           ^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-               ^^^^^^^^^^^^^^^^^^^^^^
-json.decoder.JSONDecodeError: Expecting ',' delimiter: line 8 column 19 (char 170)
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\portfolios.py", line 12, in index
-    data = request.data
-           ^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\request.py", line 216, in data
-    self._load_data_and_files()
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\request.py", line 279, in _load_data_and_files
-    self._data, self._files = self._parse()
-                              ^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\request.py", line 354, in _parse
-    parsed = parser.parse(stream, media_type, self.parser_context)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\parsers.py", line 66, in parse
-    raise ParseError('JSON parse error - %s' % str(exc))
-rest_framework.exceptions.ParseError: JSON parse error - Expecting ',' delimiter: line 8 column 19 (char 170)
-
-2023-03-16 13:43:53 [ERROR] util.logger portfolios.py:23: Failed to update employee base location c577aff1-b951-404d-84a9-8739a4c43917 - Portfolios cannot be empty
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\portfolios.py", line 19, in index
-    raise Exception("Portfolios cannot be empty")
-Exception: Portfolios cannot be empty
-
-2023-03-16 13:44:50 [ERROR] util.logger portfolios.py:25: Failed to update employee base location c577aff1-b951-404d-84a9-8739a4c43917 - Portfolios cannot be empty..
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\portfolios.py", line 17, in index
-    raise Exception("Portfolios cannot be empty..")
-Exception: Portfolios cannot be empty..
-
-2023-03-16 13:55:09 [ERROR] util.logger base_location.py:30: Failed to update employee base location c577aff1-b951-404d-84a9-8739a4c43917 - Invalid Pincode
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\base_location.py", line 18, in index
-    employee.base_location_pincode = validate_and_format_pincode(base_location_pincode)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 15, in validate_and_format_pincode
-    raise Exception("Invalid Pincode")
-Exception: Invalid Pincode
-
-2023-03-16 13:55:24 [ERROR] util.logger base_location.py:30: Failed to update employee base location c577aff1-b951-404d-84a9-8739a4c43917 - Invalid Pincode
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\base_location.py", line 18, in index
-    employee.base_location_pincode = validate_and_format_pincode(base_location_pincode)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 15, in validate_and_format_pincode
-    raise Exception("Invalid Pincode")
-Exception: Invalid Pincode
-
-2023-03-16 13:55:31 [ERROR] util.logger base_location.py:30: Failed to update employee base location c577aff1-b951-404d-84a9-8739a4c43917 - Invalid Pincode
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\base_location.py", line 18, in index
-    employee.base_location_pincode = validate_and_format_pincode(base_location_pincode)
-                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 15, in validate_and_format_pincode
-    raise Exception("Invalid Pincode")
-Exception: Invalid Pincode
-
-2023-03-16 14:19:11 [ERROR] util.logger request_otp_for_mobile_no_update.py:35: 'UUID' object has no attribute 'strip'
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\fetch\request_otp_for_mobile_no_update.py", line 26, in index
-    if(employee.employee_id.strip() == employee_id.strip()):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'UUID' object has no attribute 'strip'
-
-2023-03-16 14:29:35 [ERROR] util.logger mobile_number.py:53: Failed : Invalid OTP
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\mobile_number.py", line 21, in index
     otp = validate_and_format_otp(data.get("otp", None))
           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
     raise Exception("Invalid OTP")
 Exception: Invalid OTP
 
-2023-03-16 14:29:54 [ERROR] util.logger mobile_number.py:53: Failed : duplicate key value violates unique constraint "employees_mobile_number_key"
-DETAIL:  Key (mobile_number)=(7767991695) already exists.
+2023-03-21 13:33:27 [ERROR] util.logger basic_info.py:71: Failed to update employee basic info : 554ab970-d1b7-46e2-8b72-f102463eb97f - Profile name is already used
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\employees\apis\profile\update\basic_info.py", line 32, in index
+    raise Exception("Profile name is already used")
+Exception: Profile name is already used
 
+2023-03-21 13:33:35 [ERROR] util.logger basic_info.py:71: Failed to update employee basic info : 554ab970-d1b7-46e2-8b72-f102463eb97f - This Email ID is already used
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\employees\apis\profile\update\basic_info.py", line 45, in index
+    raise Exception("This Email ID is already used")
+Exception: This Email ID is already used
+
+2023-03-21 13:33:45 [ERROR] util.logger basic_info.py:71: Failed to update employee basic info : 554ab970-d1b7-46e2-8b72-f102463eb97f - "to" argument must be a list or tuple
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\employees\apis\profile\update\basic_info.py", line 47, in index
+    send_email("email_verification_template", {"employee_id":employee_id}, email_id)
+  File "C:\aravind\lens35\util\email_util.py", line 20, in send_email
+    msg = EmailMultiAlternatives(subject, text_message, from_email, recipient_list)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\mail\message.py", line 459, in __init__
+    super().__init__(
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\mail\message.py", line 216, in __init__
+    raise TypeError('"to" argument must be a list or tuple')
+TypeError: "to" argument must be a list or tuple
+
+2023-03-21 13:38:18 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
+    otp = validate_and_format_otp(data.get("otp", None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
+    raise Exception("Invalid OTP")
+Exception: Invalid OTP
+
+2023-03-21 13:38:23 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
+    otp = validate_and_format_otp(data.get("otp", None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
+    raise Exception("Invalid OTP")
+Exception: Invalid OTP
+
+2023-03-21 13:38:39 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
+    otp = validate_and_format_otp(data.get("otp", None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
+    raise Exception("Invalid OTP")
+Exception: Invalid OTP
+
+2023-03-21 13:42:38 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\customers\apis\authenticate\generate_token_api.py", line 21, in index
+    otp = validate_and_format_otp(data.get("otp", None))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
+    raise Exception("Invalid OTP")
+Exception: Invalid OTP
+
+2023-03-21 13:44:03 [ERROR] util.logger handle_booking.py:190: Failed to handle the booking request None
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\bookings\apis\customers\handle_booking.py", line 74, in index
+    raise Exception("Event date must be on or after today")
+Exception: Event date must be on or after today
+
+2023-03-21 13:44:51 [ERROR] util.logger handle_booking.py:190: Failed to handle the booking request None
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\bookings\apis\customers\handle_booking.py", line 155, in index
+    address = "{}, {}".format(booking.event_city, booking.pincode)
+                                                  ^^^^^^^^^^^^^^^
+AttributeError: 'Bookings' object has no attribute 'pincode'
+
+2023-03-21 13:45:13 [ERROR] util.logger handle_booking.py:190: Failed to handle the booking request None
 Traceback (most recent call last):
   File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
     return self.cursor.execute(sql, params)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "employees_mobile_number_key"
-DETAIL:  Key (mobile_number)=(7767991695) already exists.
+psycopg2.errors.UndefinedColumn: column "event_latitude" of relation "bookings" does not exist
+LINE 1: ...vent_postal_code", "event_city", "event_address", "event_lat...
+                                                             ^
 
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\mobile_number.py", line 41, in index
-    employee.save()
+  File "C:\aravind\lens35\apps\bookings\apis\customers\handle_booking.py", line 175, in index
+    booking.save()
   File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 812, in save
     self.save_base(
   File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 863, in save_base
     updated = self._save_table(
               ^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 976, in _save_table
-    updated = self._do_update(
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 1006, in _save_table
+    results = self._do_insert(
               ^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 1040, in _do_update
-    return filtered._update(values) > 0
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1216, in _update
-    return query.get_compiler(self.db).execute_sql(CURSOR)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
-    cursor = super().execute_sql(result_type)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1398, in execute_sql
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\base.py", line 1047, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1791, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\compiler.py", line 1660, in execute_sql
     cursor.execute(sql, params)
   File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
     return self._execute_with_wrappers(
@@ -269,79 +128,148 @@ Traceback (most recent call last):
   File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
     return self.cursor.execute(sql, params)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "employees_mobile_number_key"
-DETAIL:  Key (mobile_number)=(7767991695) already exists.
+django.db.utils.ProgrammingError: column "event_latitude" of relation "bookings" does not exist
+LINE 1: ...vent_postal_code", "event_city", "event_address", "event_lat...
+                                                             ^
 
 
-2023-03-16 14:37:55 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+2023-03-21 13:52:52 [ERROR] util.logger handle_booking.py:190: Failed to handle the booking request None
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
-    otp = validate_and_format_otp(data.get("otp", None))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
-    raise Exception("Invalid OTP")
-Exception: Invalid OTP
+  File "C:\aravind\lens35\apps\bookings\apis\customers\handle_booking.py", line 104, in index
+    raise Exception("Minimum Booking must be for 2 Hours")
+Exception: Minimum Booking must be for 2 Hours
 
-2023-03-16 14:38:20 [ERROR] util.logger generate_token_api.py:47: Failed : Invalid OTP
+2023-03-21 14:08:05 [ERROR] util.logger list_bookings.py:67: Failed to fetch the bookings for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
-    otp = validate_and_format_otp(data.get("otp", None))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 23, in validate_and_format_otp
-    raise Exception("Invalid OTP")
-Exception: Invalid OTP
+  File "C:\aravind\lens35\apps\bookings\apis\employees\list_bookings.py", line 19, in index
+    event_date = timezone.now().date() if (event_date == None or event_date == "") else datetime.fromisoformat(event_date).date()
+                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid isoformat string: '23-03-2023'
 
-2023-03-16 14:45:51 [ERROR] util.logger generate_token_api.py:47: Failed : expected string or bytes-like object, got 'int'
+2023-03-21 14:16:13 [ERROR] util.logger list_bookings.py:73: Failed to fetch the bookings for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\authenticate\generate_token_api.py", line 21, in index
-    otp = validate_and_format_otp(data.get("otp", None))
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\util\regex.py", line 20, in validate_and_format_otp
-    if(re.findall("^[2-9]{1}[0-9]{5}$", otp)):
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\re\__init__.py", line 216, in findall
-    return _compile(pattern, flags).findall(string)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: expected string or bytes-like object, got 'int'
+  File "C:\aravind\lens35\apps\bookings\apis\employees\list_bookings.py", line 68, in index
+    "services": list(booking.services.values_list('service', flat=True).distinct())
+                     ^^^^^^^^^^^^^^^^
+AttributeError: 'Bookings' object has no attribute 'services'
 
-2023-03-16 15:27:27 [ERROR] util.logger profile_picture.py:35: Failed to update display picture for employee c577aff1-b951-404d-84a9-8739a4c43917 - An error occurred (PoorAccountStanding) when calling the DeleteObject operation: Could not perform operation because of poor account standing or trial period expiry. Please have your Wasabi account administrator update billing information for the account.
+2023-03-21 14:22:50 [ERROR] util.logger list_bookings.py:73: Failed to fetch the bookings for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\profile_picture.py", line 24, in index
-    delete_file_from_bucket(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, employee.display_picture)
-  File "C:\aravind\lens35\util\wasabi.py", line 40, in delete_file_from_bucket
-    s3.delete_object(Bucket=bucket_name, Key=key)
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\botocore\client.py", line 530, in _api_call
-    return self._make_api_call(operation_name, kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\botocore\client.py", line 960, in _make_api_call
-    raise error_class(parsed_response, operation_name)
-botocore.exceptions.ClientError: An error occurred (PoorAccountStanding) when calling the DeleteObject operation: Could not perform operation because of poor account standing or trial period expiry. Please have your Wasabi account administrator update billing information for the account.
+  File "C:\aravind\lens35\apps\bookings\apis\employees\list_bookings.py", line 68, in index
+    "services": list(booking.services.values_list('service', flat=True).distinct())
+                     ^^^^^^^^^^^^^^^^
+AttributeError: 'Bookings' object has no attribute 'services'
 
-2023-03-16 15:38:07 [ERROR] util.logger id_proof.py:42: Failed to update ID Proof for employee c577aff1-b951-404d-84a9-8739a4c43917 - ID Proof cannot be empty
+2023-03-21 14:28:31 [ERROR] util.logger list_bookings.py:75: Failed to fetch the bookings for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\id_proof.py", line 20, in index
-    raise Exception("ID Proof cannot be empty")
-Exception: ID Proof cannot be empty
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 2142, in add_fields
+    join_info = self.setup_joins(
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1808, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+                                       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 1709, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'service_code' into field. Choices are: booking, booking_id, created_time, employee, employee_id, employeepreference, id, lifecycle, retired, service, service_id
 
-2023-03-16 15:38:14 [ERROR] util.logger id_proof.py:42: Failed to update ID Proof for employee c577aff1-b951-404d-84a9-8739a4c43917 - Invalid Document Type
-Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\id_proof.py", line 16, in index
-    document_type = __validate_and_format_document_type(data.get("document_type", None))
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\id_proof.py", line 61, in __validate_and_format_document_type
-    raise Exception("Invalid Document Type")
-Exception: Invalid Document Type
+During handling of the above exception, another exception occurred:
 
-2023-03-16 15:39:11 [ERROR] util.logger id_proof.py:29: Failed to delete the old ID Proof of employee c577aff1-b951-404d-84a9-8739a4c43917 - An error occurred (PoorAccountStanding) when calling the DeleteObject operation: Could not perform operation because of poor account standing or trial period expiry. Please have your Wasabi account administrator update billing information for the account.
 Traceback (most recent call last):
-  File "C:\aravind\lens35\apps\employees\apis\profile\update\id_proof.py", line 24, in index
-    delete_file_from_bucket(EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER, employee.id_proof_front)
-  File "C:\aravind\lens35\util\wasabi.py", line 40, in delete_file_from_bucket
-    s3.delete_object(Bucket=bucket_name, Key=key)
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\botocore\client.py", line 530, in _api_call
-    return self._make_api_call(operation_name, kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\botocore\client.py", line 960, in _make_api_call
-    raise error_class(parsed_response, operation_name)
-botocore.exceptions.ClientError: An error occurred (PoorAccountStanding) when calling the DeleteObject operation: Could not perform operation because of poor account standing or trial period expiry. Please have your Wasabi account administrator update billing information for the account.
+  File "C:\aravind\lens35\apps\bookings\apis\employees\list_bookings.py", line 63, in index
+    services = Services.objects.filter(booking = booking, employee = None).values_list('service_code', flat=True).distinct()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1330, in values_list
+    clone = self._values(*_fields, **expressions)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\query.py", line 1293, in _values
+    clone.query.set_values(fields)
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 2437, in set_values
+    self.add_fields(field_names, True)
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\db\models\sql\query.py", line 2175, in add_fields
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'service_code' into field. Choices are: booking, booking_id, created_time, employee, employee_id, employeepreference, id, lifecycle, retired, service, service_id
+
+2023-03-21 16:30:54 [ERROR] django.request log.py:241: Internal Server Error: /bookings/apis/employees/bookings/accept/
+Traceback (most recent call last):
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: index() missing 1 required positional argument: 'booking_id'
+2023-03-21 16:31:17 [ERROR] django.request log.py:241: Internal Server Error: /bookings/apis/employees/bookings/accept/
+Traceback (most recent call last):
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\django\views\generic\base.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: index() missing 1 required positional argument: 'booking_id'
+2023-03-21 16:38:04 [ERROR] util.logger accept_booking.py:37: Failed to fetch the bookings for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\bookings\apis\employees\accept_booking.py", line 33, in index
+    raise Exception("Employee is not registered to accept {} bookings".format(service.service))
+Exception: Employee is not registered to accept photography bookings
+
+2023-03-21 16:42:22 [ERROR] util.logger accept_booking.py:44: Failed to fetch the bookings for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\bookings\apis\employees\accept_booking.py", line 26, in index
+    raise Exception("Invalid service id found in the request")
+Exception: Invalid service id found in the request
+
+2023-03-21 16:51:54 [ERROR] util.logger remove_booking.py:35: Failed to remove booking/service for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\bookings\apis\employees\remove_booking.py", line 21, in index
+    service_id_list.append(UUID(sid))
+                           ^^^^^^^^^
+  File "C:\Users\apillai\AppData\Local\Programs\Python\Python311\Lib\uuid.py", line 179, in __init__
+    int = int_(hex, 16)
+          ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 16: '90834251bd8c4451ab9c0018107cadcs'
+
+2023-03-21 16:52:08 [ERROR] util.logger remove_booking.py:35: Failed to remove booking/service for employee 976b4889-4fd6-4ccc-a7ce-f540a5e89f48
+Traceback (most recent call last):
+  File "C:\aravind\lens35\apps\bookings\apis\employees\remove_booking.py", line 25, in index
+    raise Exception("Invalid service id found in the request")
+Exception: Invalid service id found in the request
 

@@ -10,7 +10,7 @@ class Customers(models.Model):
     
     subscribe_for_updates = models.BooleanField(default=True)
 
-    display_picture = models.UUIDField(max_length=100, null=True, unique=True)
+    display_picture = models.CharField(max_length=50, null=True, unique=True)
     
     class Meta:
         db_table = "customers"

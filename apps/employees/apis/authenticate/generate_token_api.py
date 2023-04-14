@@ -19,7 +19,6 @@ def index(request):
     try:
         data = request.data
         otp = validate_and_format_otp(data.get("otp", None))
-        print(otp)
         mobile_number = validate_and_format_mobile_number(request.data.get("mobile_number", None))
         
         # Define the time range

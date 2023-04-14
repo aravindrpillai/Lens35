@@ -9,7 +9,7 @@ class HTTP_STATUS(Enum):
     HTTP_200 =	"OK"
     HTTP_201 =	"Created"
     HTTP_202 =	"Accepted"
-    HTTP_203 = "Non-Authoritative Information"
+    HTTP_203 =  "Non-Authoritative Information"
     HTTP_204 =	"No Content"
     HTTP_205 =	"Reset Content"
     HTTP_206 =	"Partial Content"

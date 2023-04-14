@@ -50,7 +50,7 @@ def index(request):
         else:
             return build_response(400, "Invalid/Expired OTP", None)
     except Exception as e_0:
-        logger.error('Failed : %s\n%s', e_0, traceback.format_exc())
+        logger.error('Failed to generate token for employee mobile update: {} - {}\n{}'.format(employee_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))
 
 
@@ -72,5 +72,5 @@ def commit_token_data(employee_id, device_id, mobile_number, ip_address, keep_ac
         tk.save()
         return tk
     except Exception as e_0:
-        logger.error('Failed to commit new token information: {}}\n{}'.format(e_0, traceback.format_exc()))
+        logger.error('Failed to commit new token information (for employee mob update): {}}\n{}'.format(e_0, traceback.format_exc()))
         raise e_0

@@ -22,5 +22,5 @@ def index(request):
 
         return build_response(202, "Successfully updated", employee.portfolios)
     except Exception as e_0:
-        logger.error('Failed to update employee base location %s - %s\n%s', employee_id, e_0, traceback.format_exc())
+        logger.error('Failed to update employee base location : {} - {}\n{}'.format(employee_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))

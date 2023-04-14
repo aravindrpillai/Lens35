@@ -14,12 +14,14 @@ class Employees(models.Model):
     profile_approved = models.BooleanField(default=False)
 
     display_picture = models.CharField(max_length=50, null=True, unique=True)
-    id_proof_type = models.CharField(max_length=15, null=True, choices=(('A', 'Aadhar'), ('P', 'Passport'), ('D', 'DrivingLicence'),('V', 'VotersID')))
+    id_proof_type = models.CharField(max_length=20, null=True, choices=(('aadhar', 'aadhar'), ('passport', 'passport'), ('driving_licence', 'driving_licence'),('voters_id', 'voters_id')))
     id_proof_front = models.CharField(max_length=50, null=True, unique=True)
     id_proof_back = models.CharField(max_length=50, null=True, unique=True)
     
     base_location_pincode = models.CharField(max_length=6, null=True)
     base_location_city = models.CharField(max_length=100, null=True)
+    base_location_latitude = models.DecimalField(max_digits=15, decimal_places=12, null=True)
+    base_location_longitude = models.DecimalField(max_digits=15, decimal_places=12, null=True)
 
     portfolios = models.JSONField(null=True)
 

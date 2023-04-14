@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from corsheaders.defaults import default_headers
 
@@ -12,7 +13,6 @@ CUSTOM_HEADERS = (
     'Access-Control-Allow-Origin',
     'Token',
     'Identifier',
-    'User-Type',
     'Device-Id'
 )
 CORS_ALLOW_HEADERS = default_headers + CUSTOM_HEADERS
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'corsheaders', 
     'apps.customers',
     'apps.employees',
-  #  'apps.bookings',
+    'apps.bookings',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +66,9 @@ ROOT_URLCONF = 'lens35.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'static'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -165,5 +167,17 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+#EMAIl CONFIGURATION
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'emailforlens35@gmail.com'
+EMAIL_HOST_PASSWORD = 'helloworld001'

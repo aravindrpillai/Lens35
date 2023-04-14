@@ -17,6 +17,7 @@ import uuid
 @api_view(['POST'])
 def index(request):
     try:
+        customer_id = request.headers.get("Identifier")
         data = request.data
         otp = validate_and_format_otp(data.get("otp", None))
         mobile_number = validate_and_format_mobile_number(request.data.get("mobile_number", None))
@@ -28,12 +29,17 @@ def index(request):
         if(otp_exist):
             for otp in CustomerOTP.objects.filter(mobile_number=mobile_number):
                 otp.delete()
-            customer_id = create_user_if_not_exist(mobile_number)
             ip_address = get_client_ip(request)
             device_id = validate_and_format_uuid4("device_id", data.get("device_id", None), True)
             keep_active = False if device_id == None else validate_and_format_bool("keep_active",data.get("keep_active", False))
             token = commit_token_data(customer_id, device_id, mobile_number, ip_address, keep_active)
             
+            #Updating the Customer Table
+            customer_id = request.headers.get("Identifier")
+            customer = Customers.objects.get(customer_id = customer_id)
+            customer.mobile_number = mobile_number
+            customer.save()
+
             #Building the response
             response = {
                 "Token" : token.token,
@@ -42,9 +48,9 @@ def index(request):
             }
             return build_response(202, None, response)            
         else:
-            return build_response(401, "Invalid/Expired OTP", None)
+            return build_response(400, "Invalid/Expired OTP", None)
     except Exception as e_0:
-        logger.error('Failed : {}\n{}'.format(e_0, traceback.format_exc()))
+        logger.error('Failed to generate token for customer mobile update: {} - {}\n{}'.format(customer_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))
 
 
@@ -53,7 +59,7 @@ def index(request):
 '''
 def commit_token_data(customer_id, device_id, mobile_number, ip_address, keep_active):
     try:
-        tokens = CustomerToken.objects.filter(mobile_number= mobile_number, device_id = device_id)
+        tokens = CustomerToken.objects.filter(mobile_number= mobile_number)
         for token in tokens:
             token.delete()
         tk = CustomerToken()
@@ -66,21 +72,5 @@ def commit_token_data(customer_id, device_id, mobile_number, ip_address, keep_ac
         tk.save()
         return tk
     except Exception as e_0:
-        logger.error('Failed to commit new token information : {}\n{}'.format(e_0, traceback.format_exc()))
+        logger.error('Failed to commit new token information (for customer mob update): {}}\n{}'.format(e_0, traceback.format_exc()))
         raise e_0
-
-
-'''
-#Function to create a new user
-'''
-def create_user_if_not_exist(mobile_number):
-    try:
-        cust = Customers.objects.get(mobile_number = mobile_number)
-        return cust.customer_id
-    except:
-        logger.debug("Creating new Employee record")
-        cust = Customers()
-        cust.customer_id = uuid.uuid4()
-        cust.mobile_number = mobile_number
-        cust.save()
-        return cust.customer_id

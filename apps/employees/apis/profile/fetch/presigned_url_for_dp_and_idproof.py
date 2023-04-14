@@ -37,5 +37,5 @@ def index(request):
             return build_response(200, None, response)
     except Exception as e_0:
         employee_id = request.headers.get("Identifier")
-        logger.error('Failed to generate Presigned URL for %s [%s] - %s\n%s', employee_id, document_type, e_0, traceback.format_exc())
+        logger.error('Failed to generate Presigned URL for {} [{}] - {}\n{}'.format(employee_id, document_type, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))

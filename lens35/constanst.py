@@ -8,7 +8,45 @@ EMPLOYEES_BUCKET = "employees"
 EMPLOYEES_DP_FOLDER = "dp"
 EMPLOYEES_ID_PROOF_FOLDER = "id_proof"
 
+#CUSTOMER BUCKET DETAILS
+CUSTOMERS_BUCKET = "customers"
+CUSTOMERS_DP_FOLDER = "dp"
+
 #WASABI CREDENTIALS
 WASABI_ENDPOINT = 'https://s3.ap-southeast-1.wasabisys.com'
 WASABI_ACCESS_KEY = 'xxxxxxxxxxxxxxxxxxx'
 WASABI_ACCESS_SECRET = 'yyyyyyyyyyyyyyyyyyyyyyy'
+
+DEFAULT_BOOKING_RANGE_IN_KM = 2
+
+EVENTS = (
+    ("wedding" , "Wedding"),
+    ("engagement" , "Engagement"),
+    ("family" , "Family"),
+    ("party" , "Party"),
+    ("portrait" , "Portrait"),
+    ("maternity" , "Maternity"),
+    ("product" , "Product"),
+    ("modelling" , "Modelling"),
+    ("food" , "Food"),
+    ("vehicles" , "Vehicles"),
+    ("baby" , "Baby"),
+    ("short_film" , "Short Film"),
+    ("kids" , "Kids"),
+    ("sport" , "Sport"),
+    ("pet" , "Pet"),
+    ("religious" , "Religious"),
+    ("graduation" , "Graduation"),
+    ("real_estate" , "Real Estate"),
+    ("team_and_office" , "Team and office"),
+    ("other" , "Other")
+)
+
+
+SERVICES = (
+    ("photography", "photography"),
+    ("videography", "videography"),
+    ("drone_photography", "drone_photography"),
+    ("photo_editing", "photo_editing"), 
+    ("video_editing", "video_editing")
+)

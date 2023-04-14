@@ -20,6 +20,10 @@ def index(request):
                 link = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, employee.display_picture)
             return build_response(200, "No Change in DP", {"link": link})
         
+        if(employee.display_picture != None):
+            logger.debug("Deleting employee old profile picture as part of update - File: {}".format(employee.display_picture))
+            delete_file_from_bucket(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, employee.display_picture)
+
         if(file_name == None or file_name == ""):
             employee.display_picture = None
             employee.save()
@@ -31,5 +35,5 @@ def index(request):
             return build_response(202, "DP updated successfully", {"link": new_link})
         
     except Exception as e_0:
-        logger.error('Failed to update display picture for employee %s - %s\n%s', employee_id, e_0, traceback.format_exc())
+        logger.error('Failed to update display picture for employee : {} - {}\n{}'.format(employee_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))

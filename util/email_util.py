@@ -1,19 +1,24 @@
-from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from lens35.settings import BASE_DIR
+import os
 
 def send_email(template, template_data, recipient_list, attachments = None):
-    # subject = "Derive based on template"
-    # if recipient_list == None:
-    #     raise Exception("No Recipient Found")
-    # template = 'email_templates/'+template
-    # message = render_to_string(template, template_data)
-    # msg = EmailMultiAlternatives(subject, message, settings.EMAIL_HOST_USER, recipient_list)
+    
+    print("{} -- {} -- {} -- {}".format(template, template_data, recipient_list, attachments))
+    subject = 'Subject line of the email'
+    from_email = 'emailforlens35@gmail.com'
+    
+    # Load the HTML and plain text versions of the email message
+    template_file = os.path.join(BASE_DIR, 'static', 'email_templates', 'verify_email_template.html')
+    print(template_file.replace("\\","/")) 
+    html_message = render_to_string(template_file, {'context': 'Your HTML context here'})
+    text_message = strip_tags(html_message)
 
-    # if attachments != None:
-    #     for attachment in attachments:
-    #         msg.attach_file(attachment)
+    # Create the email message object and specify the HTML and plain text versions
+    msg = EmailMultiAlternatives(subject, text_message, from_email, recipient_list)
+    msg.attach_alternative(html_message, "text/html")
 
-    # msg.attach_alternative(message, "text/html")
-    # msg.send()
-    pass
+    # Send the email
+    msg.send()

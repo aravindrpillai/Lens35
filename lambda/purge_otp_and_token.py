@@ -13,28 +13,28 @@ def purge():
         __customer_otp()
         logger.info("Done customer otp deletion...")
     except Exception as e:
-        logger.error('Failed to delete customer otps %s\n%s', e, traceback.format_exc())
+        logger.error('Failed to delete customer otps : {}\n{}'.format(e, traceback.format_exc()))
 
     try:
         logger.info("Starting to delete customer tokens")
         __customer_token()
         logger.info("Done customer token deletion...")
     except Exception as e:
-        logger.error('Failed to delete customer tokens %s\n%s', e, traceback.format_exc())
+        logger.error('Failed to delete customer tokens : {}\n{}'.format(e, traceback.format_exc()))
 
     try:
         logger.info("Starting to delete employee otps")
         __employee_otp()
         logger.info("Done employee otp deletion...")
     except Exception as e:
-        logger.error('Failed to delete employee otps %s\n%s', e, traceback.format_exc())
+        logger.error('Failed to delete employee otps : {}\n{}'.format(e, traceback.format_exc()))
 
     try:
         logger.info("Starting to delete employee tokens")
         __employee_token()
         logger.info("Done employee token deletion...")
     except Exception as e:
-        logger.error('Failed to delete employee tokens %s\n%s', e, traceback.format_exc())
+        logger.error('Failed to delete employee tokens {}\n{}'.format(e, traceback.format_exc()))
 
 
 def __customer_otp():
@@ -44,7 +44,7 @@ def __customer_otp():
         try:
             record.delete()
         except Exception as e:
-            logger.error('Failed to delete customer otp %s : %s\n%s', record, e, traceback.format_exc())
+            logger.error('Failed to delete customer otp {} : {}\n{}'.format(record, e, traceback.format_exc()))
 
 def __employee_otp():
     sms_validity = timezone.now() - timezone.timedelta(minutes=SMS_OTP_EXPIRY_IN_MINUTES)
@@ -53,7 +53,7 @@ def __employee_otp():
         try:
             record.delete()
         except Exception as e:
-            logger.error('Failed to delete employee otp %s : %s\n%s', record, e, traceback.format_exc())
+            logger.error('Failed to delete employee otp {} : {}\n{}'.format(record, e, traceback.format_exc()))
 
 def __employee_token():
     token_validity = timezone.now() - timezone.timedelta(minutes=TOKEN_EXPIRY_TIME_IN_MINUTES)
@@ -62,7 +62,7 @@ def __employee_token():
         try:
             record.delete()
         except Exception as e:
-            logger.error('Failed to delete employee token%s : %s\n%s', record, e, traceback.format_exc())
+            logger.error('Failed to delete employee token {} : {}\n{}'.format(record, e, traceback.format_exc()))
 
 def __customer_token():
     token_validity = timezone.now() - timezone.timedelta(minutes=TOKEN_EXPIRY_TIME_IN_MINUTES)
@@ -71,5 +71,5 @@ def __customer_token():
         try:
             record.delete()
         except Exception as e:
-            logger.error('Failed to delete customer token %s : %s\n%s', record, e, traceback.format_exc())
+            logger.error('Failed to delete customer token {} : {}\n{}'.format(record, e, traceback.format_exc()))
 
