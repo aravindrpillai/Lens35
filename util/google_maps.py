@@ -1,11 +1,11 @@
 import googlemaps 
 from geopy.geocoders import GoogleV3
 from geopy.distance import distance
-from property_reader import PropertyReader
+from util.property_reader import PropertyReader
 
-api_key = PropertyReader.get_property("google_maps","api_key")
 
 def get_distance_bw_2_places(place_1, place_2):
+    api_key = PropertyReader.get_property("google_maps","api_key")
     place_1 = 'Rosemala, 691309' 
     place_2 = 'HSR Layout, 560102'    
     gmaps = googlemaps.Client(key = api_key)  
@@ -13,6 +13,7 @@ def get_distance_bw_2_places(place_1, place_2):
     return distance
 
 def get_cordinates(address):
+    api_key = PropertyReader.get_property("google_maps","api_key")
     geolocator = GoogleV3(api_key=api_key)
     location = geolocator.geocode(address)
     return (location.latitude, location.longitude)
