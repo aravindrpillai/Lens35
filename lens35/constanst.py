@@ -4,12 +4,12 @@ SMS_OTP_LIMIT_PER_SESSION = 3                      # Maximum no of OTP SMS to be
 TOKEN_EXPIRY_TIME_IN_MINUTES = 10                  # Token validity (if not registered as KEEP_ACTIVE=true)
 
 #EMPLOYEE BUCKET DETAILS
-EMPLOYEES_BUCKET = "employees"
+EMPLOYEES_BUCKET = "lens35-employees"
 EMPLOYEES_DP_FOLDER = "dp"
 EMPLOYEES_ID_PROOF_FOLDER = "id_proof"
 
 #CUSTOMER BUCKET DETAILS
-CUSTOMERS_BUCKET = "customers"
+CUSTOMERS_BUCKET = "lens35-customers"
 CUSTOMERS_DP_FOLDER = "dp"
 
 DEFAULT_BOOKING_RANGE_IN_KM = 2
