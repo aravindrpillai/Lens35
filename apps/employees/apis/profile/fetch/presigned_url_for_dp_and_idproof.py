@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from util.http import build_response
 from util.logger import logger
 import traceback
+import mimetypes
 import uuid
 
 @api_view(['POST'])
@@ -11,7 +12,11 @@ def index(request):
     try:
         data = request.data
         document_type = data.get("document_type", None)
-        file_extension = data.get("file_extension", None)
+        mime_type = data.get("mime_type", None)
+        if(mime_type == None or mime_type == "" or (not mime_type.startswith('image/'))):
+            raise Exception("Invalid File type. Please upload image files only")
+        file_extension = mimetypes.guess_extension(mime_type, strict=False)
+
         if(document_type == None):
             raise Exception("Document type cannot be empty to rquest presigned URL")
         else:
