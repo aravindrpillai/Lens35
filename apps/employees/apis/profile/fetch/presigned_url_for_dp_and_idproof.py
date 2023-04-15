@@ -30,7 +30,7 @@ def index(request):
                     folder = EMPLOYEES_ID_PROOF_FOLDER
                 case __:
                     raise Exception("Invalid document type. Type must be once amongst [display_picture, id_proof_front, id_proof_back]")
-            file_name = "{}.{}".format(uuid.uuid4(), file_extension)
+            file_name = "{}{}".format(uuid.uuid4(), file_extension)
             url_info = get_presigned_url_to_push_object(EMPLOYEES_BUCKET, folder, file_name)
             
             response = {
