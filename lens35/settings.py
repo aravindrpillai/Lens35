@@ -19,18 +19,14 @@ CORS_ALLOW_HEADERS = default_headers + CUSTOM_HEADERS
 
 
 #TODO
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
-
-#TODO
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000'
-    'http://localhost:3000',
-)
+CORS_ALLOWED_ORIGINS = []
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 #TODO
 ALLOWED_HOSTS = [
+    'ec2-54-209-198-222.compute-1.amazonaws.com',
+    '54.209.198.222',
     '127.0.0.1',
     'localhost',
 ]
