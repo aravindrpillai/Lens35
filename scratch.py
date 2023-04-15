@@ -33,3 +33,19 @@ print("2. Elapsed time: ", elapsed_time, "seconds")
 
 
 print("Haversine : {} | Google : {}".format(distance_using_haversine, distance_using_google))
+
+
+import configparser
+
+class PropertyReader:
+    @staticmethod
+    def get_property(section, key):
+        config = configparser.ConfigParser()
+        config.read("C:/lens_35.properties")
+        try:
+            return config.get(section, key)
+        except configparser.NoOptionError:
+            return None
+
+
+print(PropertyReader.get_property("google_maps", "api_key"))
