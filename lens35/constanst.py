@@ -12,11 +12,6 @@ EMPLOYEES_ID_PROOF_FOLDER = "id_proof"
 CUSTOMERS_BUCKET = "customers"
 CUSTOMERS_DP_FOLDER = "dp"
 
-#WASABI CREDENTIALS
-WASABI_ENDPOINT = 'https://s3.ap-southeast-1.wasabisys.com'
-WASABI_ACCESS_KEY = 'xxxxxxxxxxxxxxxxxxx'
-WASABI_ACCESS_SECRET = 'yyyyyyyyyyyyyyyyyyyyyyy'
-
 DEFAULT_BOOKING_RANGE_IN_KM = 2
 
 EVENTS = (

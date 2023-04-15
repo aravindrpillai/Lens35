@@ -1,9 +1,11 @@
 import boto3
-from lens35.constanst import WASABI_ENDPOINT, WASABI_ACCESS_KEY, WASABI_ACCESS_SECRET
+from util.property_reader import PropertyReader
 
 def __get_s3_client():
-    return boto3.client('s3', endpoint_url = WASABI_ENDPOINT, aws_access_key_id = WASABI_ACCESS_KEY, aws_secret_access_key = WASABI_ACCESS_SECRET)
-    
+    endpoint = PropertyReader.get_property("wasabi","endpoint")
+    key = PropertyReader.get_property("wasabi","access_key")
+    secret = PropertyReader.get_property("wasabi","secret_key")
+    return boto3.client('s3', endpoint_url = endpoint, aws_access_key_id = key, aws_secret_access_key = secret)
 
 def get_presigned_url_to_push_object(bucket_name, folder_name, file_name, url_valid_for=600):
     s3 = __get_s3_client()
