@@ -68,7 +68,7 @@ def __create_service(booking, type, count):
         service.service = type
         service.lifecycle = [create_lifecycle_event("Created {}".format(type))]
         service.save()
-        __create_service_invoice(service, booking)
+        __create_service_invoice(service)
 
 
     
