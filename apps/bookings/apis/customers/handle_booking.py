@@ -100,12 +100,10 @@ def index(request):
 
         #Booking Duration
         if(event_duration != None and event_duration != ""):
-            if(event_duration < 120):
+            if(event_duration < 2):
                 raise Exception("Minimum Booking must be for 2 Hours")
-            if(event_duration > 480):
+            if(event_duration > 8):
                 raise Exception("Booking cannot exceed 8 Hours")
-            if(event_duration % 30 != 0):
-                raise Exception("Booking must be multiple of 30 minutes")
             if(is_booking_update):
                 if(booking.event_duration != event_duration):
                     lifecycle.append(create_lifecycle_event("Field modified", "event_duration", booking.event_duration, event_duration))
