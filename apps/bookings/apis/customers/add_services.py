@@ -90,7 +90,7 @@ def __create_service_invoice(service):
     service_invoice.service_amount = initial_service_cost
     service_invoice.discount_code = None
     service_invoice.other_cost = 0
-    service_invoice.final_amount = (initial_service_cost + service.other_cost)
+    service_invoice.final_amount = (initial_service_cost + service_invoice.other_cost)
     service_invoice.paid  = False
     service_invoice.save()
 
