@@ -1,6 +1,5 @@
 from django.db import models
 from apps.customers.models import Customers
-from apps.bookings.models.payments import Payment 
 from lens35.constanst import EVENTS
 
 class Bookings(models.Model):
@@ -23,8 +22,6 @@ class Bookings(models.Model):
 
     lifecycle = models.JSONField(null=True)
     customer = models.ForeignKey(Customers, null=False, on_delete=models.CASCADE)
-    
-    payment = models.ForeignKey(Payment, null=True, on_delete=models.CASCADE)
     
     class Meta:
         db_table = "bookings"

@@ -1,5 +1,7 @@
+from lens35.constanst import PHOTOGRAPHER_RATE_PER_HOUR, VIDEOGRAPHER_RATE_PER_HOUR, DRONE_RATE_PER_HOUR
 from apps.bookings.helper import create_lifecycle_event, append_with_previous_lifecycle
 from apps.bookings.apis.customers.fetch_services import fetch_services
+from apps.bookings.models.service_invoice import ServiceInvoice
 from apps.bookings.models.bookings import Bookings
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
@@ -46,7 +48,7 @@ def index(request):
            
         if(video_editor_count != None and video_editor_count != "" and video_editor_count > 0):
             __create_service(booking, "video_editing", 1)
-           
+
         if(photographer_count > 0 or videographer_count > 0 or drone_photographer_count > 0 or photo_editor_count > 0 or video_editor_count > 0):
             life_cycle_event = create_lifecycle_event("Service Added - Photographer : {}, Videographer : {}, Drone Photographer : {}, Photo Editor : {}, Video Editor : {}, ".format(photographer_count, videographer_count, drone_photographer_count, photo_editor_count, video_editor_count))
             booking.lifecycle = append_with_previous_lifecycle(booking.lifecycle, life_cycle_event)
@@ -66,3 +68,26 @@ def __create_service(booking, type, count):
         service.service = type
         service.lifecycle = [create_lifecycle_event("Created {}".format(type))]
         service.save()
+        __create_service_invoice(service, booking)
+
+
+    
+def __create_service_invoice(service):
+    initial_service_cost = 0
+    match service:
+        case "photography" : initial_service_cost = PHOTOGRAPHER_RATE_PER_HOUR * service.booking.event_duration
+        case "videography" : initial_service_cost = VIDEOGRAPHER_RATE_PER_HOUR * service.booking.event_duration
+        case "drone_photography" : initial_service_cost = DRONE_RATE_PER_HOUR * service.booking.event_duration
+        case "photo_editing" : initial_service_cost = 0
+        case "video_editing" : initial_service_cost = 0
+        case __ : raise Exception("Failed to rate the service. invalid service code")
+            
+    service_invoice = ServiceInvoice()
+    service_invoice.service = service
+    service_invoice.service_amount = initial_service_cost
+    service_invoice.discount_code = None
+    service_invoice.other_cost = 0
+    service_invoice.final_amount = (initial_service_cost + service.other_cost)
+    service_invoice.paid  = False
+    service_invoice.save()
+
