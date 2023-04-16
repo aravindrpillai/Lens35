@@ -68,13 +68,16 @@ def __create_service(booking, type, count):
         service.service = type
         service.lifecycle = [create_lifecycle_event("Created {}".format(type))]
         service.save()
-        __create_service_invoice(service)
-
+        try:
+            __create_service_invoice(service)
+        except Exception as e_0:
+            service.delete()
+            raise e_0
 
     
 def __create_service_invoice(service):
     initial_service_cost = 0
-    match service:
+    match service.service:
         case "photography" : initial_service_cost = PHOTOGRAPHER_RATE_PER_HOUR * service.booking.event_duration
         case "videography" : initial_service_cost = VIDEOGRAPHER_RATE_PER_HOUR * service.booking.event_duration
         case "drone_photography" : initial_service_cost = DRONE_RATE_PER_HOUR * service.booking.event_duration
