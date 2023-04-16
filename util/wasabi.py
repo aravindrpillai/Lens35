@@ -31,7 +31,8 @@ def get_presigned_url_to_access_object(bucket_name, folder_name, file_name, url_
         Params={
             'Bucket': bucket_name,
             'Key': key,
-            'ResponseExpires': url_valid_for
+            'ResponseExpires': url_valid_for,
+            'ResponseContentDisposition' : 'inline'
         }
     )
     return url
