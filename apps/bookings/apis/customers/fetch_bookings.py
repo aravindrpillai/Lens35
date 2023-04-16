@@ -13,7 +13,7 @@ def index(request):
     try:
         customer_id = request.headers.get("Identifier")
         response = []
-        for booking in Bookings.objects.filter(customer_customer_id = customer_id):
+        for booking in Bookings.objects.filter(customer__customer_id = customer_id):
         
             services = []
             for service in Services.objects.filter(booking = booking).exclude(retired = True):
