@@ -12,7 +12,9 @@ TOKEN_EXPIRY_TIME_IN_MINUTES = 10                  # Token validity (if not regi
 EMPLOYEES_BUCKET = "lens35-employees"
 EMPLOYEES_DP_FOLDER = "dp"
 EMPLOYEES_ID_PROOF_FOLDER = "id_proof"
-BOOKINGS_BUCKET = "bookings"
+
+#BOOKINGS BUCKET
+BOOKINGS_BUCKET = "lens35-bookings"
 
 #CUSTOMER BUCKET DETAILS
 CUSTOMERS_BUCKET = "lens35-customers"

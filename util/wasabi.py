@@ -44,5 +44,5 @@ def delete_file_from_bucket(bucket_name, folder_name, file_name):
     return True
 
 def create_folder_inside_bucket(bucket_name, folder_name):
-    s3 = boto3.client('s3')
+    s3 = __get_s3_client()
     s3.put_object(Bucket=bucket_name, Key=(folder_name+'/'))
