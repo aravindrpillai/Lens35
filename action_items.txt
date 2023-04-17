@@ -1,0 +1,12 @@
+On Mobile UPdate - Make sure we are deleting the old token information --> 
+New token is sent back and we are replacing the old token with the new one in the front end.
+But at the same time the old token must be deleted from the backend as well --> Verify this..
+------------------------------------------------------------------------------------------
+
+Payload of DP upload in customer profile is pending. 
+In Django, in request the payload -> its kept as "document_extension", we need to change it to mime_type and 
+do the integration with reactjs.
+THe entire thing is pending.
+
+
+------------------------------------------------------------------------------------------
