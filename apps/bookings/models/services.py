@@ -13,6 +13,7 @@ class Services(models.Model):
     
     employee = models.ForeignKey(Employees, null=True, on_delete=models.CASCADE)
     lifecycle = models.JSONField(null=True)
+    closed = models.BooleanField(default=False)
     retired = models.BooleanField(default=False)
 
     class Meta:

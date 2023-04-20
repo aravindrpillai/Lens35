@@ -1,19 +1,16 @@
 from util.wasabi import get_presigned_url_to_push_object, create_folder_inside_bucket
-from apps.bookings.models.bookings import Bookings
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
 from lens35.constanst import BOOKINGS_BUCKET
 from util.http import build_response
 from util.logger import logger
 import traceback
-import mimetypes
-import uuid
 
 @api_view(['POST'])
 def index(request):
     try:
         data = request.data
-
+        employee_id = request.headers.get("Identifier")
         service_id = data.get("service_id", None)
         mime_type = data.get("mime_type", None)
         file_name = data.get("file_name", None)
@@ -21,9 +18,10 @@ def index(request):
 
         print("{} - {} - {}".format(file_name, mime_type, is_photo))
 
-        #todo - verify if the b ooking id is associated to the right employee
-        #booking = Services.object.get(service_id = service_id)
-
+        service = Services.objects.get(service_id = service_id, employee__employee_id = employee_id)
+        if(service.retired):
+            raise Exception("Cannot upload to this service. Service is expired")
+        
         # if(mime_type == None or mime_type == "" or (not mime_type.startswith('image/'))):
         #     raise Exception("Invalid File type. Please upload image files only")
         # file_extension = mimetypes.guess_extension(mime_type, strict=False)
