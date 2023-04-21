@@ -5,15 +5,21 @@ from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view
 from util.http import build_response
+from django.utils import timezone
 from util.logger import logger
+from datetime import datetime
 import traceback
 
 @api_view(['GET'])
 def index(request):
     try:
         customer_id = request.headers.get("Identifier")
+        data = request.data
+        event_date = data.get("event_date", None)
+        event_date = timezone.now().date() if (event_date == None or event_date == "") else datetime.fromisoformat(event_date).date()
+        
         response = []
-        for booking in Bookings.objects.filter(customer__customer_id = customer_id):
+        for booking in Bookings.objects.filter(customer__customer_id = customer_id, event_date = event_date):
         
             services = []
             for service in Services.objects.filter(booking = booking).exclude(retired = True):
