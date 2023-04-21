@@ -10,7 +10,7 @@ from util.logger import logger
 from datetime import datetime
 import traceback
 
-@api_view(['GET'])
+@api_view(['POST'])
 def index(request):
     try:
         customer_id = request.headers.get("Identifier")
