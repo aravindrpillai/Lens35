@@ -1,0 +1,1850 @@
+{
+	"info": {
+		"_postman_id": "ec944ee2-e18a-46fb-b163-ed7640aba15c",
+		"name": "Lens-35",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7496065"
+	},
+	"item": [
+		{
+			"name": "employees",
+			"item": [
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "fetch",
+							"item": [
+								{
+									"name": "Employee Info",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/fetch/info/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"fetch",
+												"info",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PreSigned URL",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\r\n\t\"document_type\": \"display_picture\",\r\n    \"mime_type\": \"image/jpeg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/fetch/presigned/url/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"fetch",
+												"presigned",
+												"url",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Request OTP for mob no update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"var jsonData = pm.response.json()\r",
+													"var otp = jsonData[\"data\"][\"otp_for_testing_purpose\"];\r",
+													"pm.globals.set(\"employee_mobile_otp\", otp);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\r\n\t\"mobile_number\": \"9447020539\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/fetch/mobilenumber/requestotp/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"fetch",
+												"mobilenumber",
+												"requestotp",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "update",
+							"item": [
+								{
+									"name": "Basic Info",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\r\n\t\"full_name\" : \"Deepu Chandran\",\r\n    \"profile_name\" : \"deepu\",\r\n    \"email_id\" : \"deepu@yahoo.com\",\r\n    \"subscribe_for_updates\" : \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/basic/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"basic",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Services",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\r\n\t\"is_photographer\": true,\r\n    \"is_videographer\": false,\r\n    \"is_drone_photographer\": true,\r\n    \"is_photo_editor\": true,\r\n    \"is_video_editor\": false\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/services/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"services",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Portfolios",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"portfolios\": [\r\n        {\r\n            \"name\": \"instagram\",\r\n            \"value\": \"https://instagram.com/aravindrpillai\"\r\n        },\r\n        {\r\n            \"name\": \"facebook\",\r\n            \"value\": \"https://facebook.com/aravindrpillai\"\r\n        },\r\n        {\r\n            \"name\": \"other\",\r\n            \"value\": \"https://aravindrpillai.com\"\r\n        }\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/portfolios/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"portfolios",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Base Locations",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"base_location_pincode\": \"691306\",\r\n    \"base_location_city\" : \"Anchal\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/baselocations/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"baselocations",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Mobile Number",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"mobile_number\": \"9447020539\",\r\n    \"otp\" : \"{{employee_mobile_otp}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/mobilenumber/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"mobilenumber",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Profile Picture",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file_name\": \"71c276d6-ab46-4edf-a12c-032ee0eebab3.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/profilepicture/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"profilepicture",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "ID Proof",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"document_type\": \"aadhar\",\r\n    \"front_file_name\": \"1111111-1111-4edf-a12c.jpg\",\r\n    \"back_file_name\": \"22222222-2222-4edf-a12c.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/employees/apis/profile/update/idproof/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"employees",
+												"apis",
+												"profile",
+												"update",
+												"idproof",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "authenticate",
+					"item": [
+						{
+							"name": "Push_OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    var otp = jsonData[\"data\"][\"otp_for_testing_purpose\"];\r",
+											"    pm.globals.set(\"employee_mobile_otp\", otp);\r",
+											"    console.log(\"OTP stored to global session: \", otp);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile_number\": \"9495495871\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/generate/otp/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"generate",
+										"otp",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Generate New Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    \r",
+											"var jsonData = pm.response.json()\r",
+											"\r",
+											"var token = jsonData[\"data\"][\"Token\"];\r",
+											"var deviceId = jsonData[\"data\"][\"Device-Id\"];\r",
+											"var identifier = jsonData[\"data\"][\"Identifier\"];\r",
+											"console.log(token, deviceId, identifier);\r",
+											"\r",
+											"pm.globals.set(\"Employee_Token\", token);\r",
+											"pm.globals.set(\"Employee_Device_Id\", deviceId);\r",
+											"pm.globals.set(\"Employee_Identifier\", identifier);\r",
+											"\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"otp\":\"{{employee_mobile_otp}}\",\r\n    \"mobile_number\":\"9495495871\",\r\n    \"device_id\": \"b30b71c1-e473-4837-b4a7-98280bc4a423\",\r\n    \"keep_active\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/generate/token/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"generate",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "update",
+							"item": [
+								{
+									"name": "Update Profile",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"full_name\": \"Sukanya London\",\r\n    \"email_id\": \"suk@gmail.com\",\r\n    \"subscribe_for_updates\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/profile/update/basicinfo/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"profile",
+												"update",
+												"basicinfo",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Mobile Number",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"mobile_number\": \"9447020555\",\r\n    \"otp\" : \"{{customer_mobile_otp}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/profile/update/mobilenumber/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"profile",
+												"update",
+												"mobilenumber",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Profile Picture",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file_name\": \"71c276d6-ab46-4edf-a12c-032ee0eebab3.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/profile/update/profilepicture/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"profile",
+												"update",
+												"profilepicture",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "fetch",
+							"item": [
+								{
+									"name": "Customer Info",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/profile/fetch/info/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"profile",
+												"fetch",
+												"info",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "PreSigned URL",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\r\n    \"file_extension\": \"jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/profile/fetch/presigned/url/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"profile",
+												"fetch",
+												"presigned",
+												"url",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Request OTP for mob no update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"var jsonData = pm.response.json()\r",
+													"var otp = jsonData[\"data\"][\"otp_for_testing_purpose\"];\r",
+													"pm.globals.set(\"customer_mobile_otp\", otp);\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\t\r\n\t\"mobile_number\": \"9447020555\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/profile/fetch/mobilenumber/requestotp/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"profile",
+												"fetch",
+												"mobilenumber",
+												"requestotp",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "authenticate",
+					"item": [
+						{
+							"name": "Push_OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    var otp = jsonData[\"data\"][\"otp_for_testing_purpose\"];\r",
+											"    pm.globals.set(\"customer_mobile_otp\", otp);\r",
+											"    console.log(\"OTP stored to global session: \", otp);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mobile_number\": \"7767991693\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/customers/apis/generate/otp/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"apis",
+										"generate",
+										"otp",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Generate New Token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    \r",
+											"var jsonData = pm.response.json()\r",
+											"\r",
+											"var token = jsonData[\"data\"][\"Token\"];\r",
+											"var deviceId = jsonData[\"data\"][\"Device-Id\"];\r",
+											"var identifier = jsonData[\"data\"][\"Identifier\"];\r",
+											"console.log(token, deviceId, identifier);\r",
+											"\r",
+											"pm.globals.set(\"Customer_Token\", token);\r",
+											"pm.globals.set(\"Customer_Device_Id\", deviceId);\r",
+											"pm.globals.set(\"Customer_Identifier\", identifier);\r",
+											"\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"otp\":\"{{customer_mobile_otp}}\",\r\n    \"mobile_number\":\"7767991693\",\r\n    \"device_id\": \"b30b71c1-e473-4837-b4a7-98280bc4a423\",\r\n    \"keep_active\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/customers/apis/generate/token/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"apis",
+										"generate",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "generic",
+			"item": [
+				{
+					"name": "PostaCode API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://postalpincode.in/api/pincode/691303",
+							"protocol": "http",
+							"host": [
+								"postalpincode",
+								"in"
+							],
+							"path": [
+								"api",
+								"pincode",
+								"691303"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookings",
+			"item": [
+				{
+					"name": "customers",
+					"item": [
+						{
+							"name": "Handle Booking",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    var jsonData = pm.response.json()\r",
+											"    var booking_id = jsonData[\"data\"][\"booking_id\"];\r",
+											"    pm.globals.set(\"booking_id\", booking_id);\r",
+											"    console.log(\"booking_id stored to global session: \", booking_id);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": null,\r\n    \"event\": \"kids\",\r\n    \"event_description\": \"Kids Shoot\",\r\n    \"event_date\": \"2023-03-23\",\r\n    \"event_start_time\": \"12:30\",\r\n    \"event_duration\": 3,\r\n    \"event_postal_code\": \"691303\",\r\n    \"event_city\": \"Kakkotumoola\",\r\n    \"event_address\": \"Kakkotumoola House\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/booking/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"booking",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Services",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/services/fetch/{{booking_id}}",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"services",
+										"fetch",
+										"{{booking_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Bookings",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/bookings/fetch/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"bookings",
+										"fetch",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Invoice",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/fetch/invoice/d6c85f9d-c92c-4f23-9db5-1ef143acb1d6/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"fetch",
+										"invoice",
+										"d6c85f9d-c92c-4f23-9db5-1ef143acb1d6",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Services",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": \"{{booking_id}}\",\r\n    \"photography\": 1,\r\n    \"videography\": 0,\r\n    \"drone_photography\": 0,\r\n    \"photo_editing\": 0,\r\n    \"video_editing\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/services/add/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"services",
+										"add",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Services",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": \"{{booking_id}}\",\r\n    \"service_id_list\" : [\r\n        \"ee4d0298-652b-44a8-a48c-a88e198f01e2\"   \r\n    ]\r\n}\r\n\r\n            ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/services/remove/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"services",
+										"remove",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "employees",
+					"item": [
+						{
+							"name": "file_upload",
+							"item": [
+								{
+									"name": "Fetch Presigned URL",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"service_id\":\"1111-222-333-444-555\",\r\n    \"file_name\" : \"IMG_001.jpeg\",\r\n    \"mime_type\" : \"image/jpeg\",\r\n    \"is_photo\" : true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/bookings/apis/employees/bookings/fileupload/fetch/presignedurl/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"bookings",
+												"apis",
+												"employees",
+												"bookings",
+												"fileupload",
+												"fetch",
+												"presignedurl",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Acknodwledge File Upload",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"service_id\": \"12334\",\r\n    \"mime_type\": \"image/jpeg\",\r\n    \"file_name\": \"file_name.jpeg\",\r\n    \"uploaded\": true\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/bookings/apis/employees/bookings/fileupload/acknodwledge/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"bookings",
+												"apis",
+												"employees",
+												"bookings",
+												"fileupload",
+												"acknodwledge",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Fetch  Booking With Pending File Upload",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/bookings/apis/employees/fetch/bookings/withpendingfileupload/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"bookings",
+												"apis",
+												"employees",
+												"fetch",
+												"bookings",
+												"withpendingfileupload",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "List Open Bookings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"distance_range\":50,\r\n    \"event_date\": \"2023-03-23\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/employees/bookings/list/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"employees",
+										"bookings",
+										"list",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept Booking",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": \"a617fafc-480f-4248-98de-c03433845bce\",\r\n    \"service_id_list\": [\r\n        \"90834251-bd8c-4451-ab9c-0018107cadca\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/employees/bookings/accept/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"employees",
+										"bookings",
+										"accept",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Booking",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": \"a617fafc-480f-4248-98de-c03433845bce\",\r\n    \"service_id_list\": [\r\n        \"90834251-bd8c-4451-ab9c-0018107cadca\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/employees/bookings/remove/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"employees",
+										"bookings",
+										"remove",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch  Booking",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/employees/bookings/fetch/dd4eb99b-c6f6-481a-9b88-02d03f961166/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"employees",
+										"bookings",
+										"fetch",
+										"dd4eb99b-c6f6-481a-9b88-02d03f961166",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "http://localhost:8888",
+			"type": "string"
+		}
+	]
+}
