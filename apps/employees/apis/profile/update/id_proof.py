@@ -15,7 +15,7 @@ def index(request):
         data = request.data
 
         document_type = data.get("document_type", None)
-        valid_document_types = ['aadhar', 'passport', 'driving_licence', 'voters_id']
+        valid_document_types = ['aadharcard', 'passport', 'driving_licence', 'voters_id']
         if((document_type == None or document_type == "") or (not (document_type.lower() in valid_document_types))):
             raise Exception("Document Type cannot be empty. Value must be one amongst {}".format(str(valid_document_types)))
         document_type = document_type.lower()    
@@ -48,21 +48,3 @@ def index(request):
     except Exception as e_0:
         logger.error('Failed to update ID Proof for employee {} - {}\n{}'.format(employee_id, e_0, traceback.format_exc()))
         return build_response(400, str(e_0))
-    
-
-def __validate_and_format_document_type(document_type):
-    # 'A'- 'Aadhar' || 'P', 'Passport'  || 'D', 'DrivingLicence'  || 'V', 'VotersID'
-    if(document_type == None or document_type == ""):
-        raise Exception("Document Type cannot be empty.")
-    document_type = document_type.lower()
-    match document_type:
-        case "aadhar":
-            return "A"
-        case "passport":
-            return "P"
-        case "driving_licence":
-            return "D"
-        case "voters_id":
-            return "V"
-        case __:
-            raise Exception("Invalid Document Type")
