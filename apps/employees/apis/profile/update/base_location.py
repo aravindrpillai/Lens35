@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from util.http import build_response
 from util.logger import logger
 from util.google_maps import get_cordinates
+from .helper import update_account_status
 import traceback
 
 @api_view(['POST'])
@@ -23,6 +24,7 @@ def index(request):
             cord = get_cordinates(address)
             employee.base_location_latitude = cord[0]
             employee.base_location_longitude = cord[1]
+            update_account_status(employee)
             employee.save()
         else:
             raise Exception("PostalCode and City must be available together")

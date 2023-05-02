@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view
 from util.email_util import send_email
 from util.http import build_response
 from util.logger import logger
+from .helper import update_account_status
 import traceback
 
 @api_view(['POST'])
@@ -55,6 +56,7 @@ def index(request):
             updated = True
             
         if(updated):
+            update_account_status(employee)
             employee.save()
 
         response = {
@@ -62,7 +64,8 @@ def index(request):
             "profile_name" : employee.profile_name,
             "email_id" : employee.email_id,
             "email_id_verified" : employee.email_id_verified,
-            "subscribe_for_updates" : employee.subscribe_for_updates
+            "subscribe_for_updates" : employee.subscribe_for_updates,
+            "is_draft" : employee.is_draft
         }
         message = "Successfully updated" if updated else "No changes to update"
         return build_response(202, message , response)

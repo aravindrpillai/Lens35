@@ -3,6 +3,7 @@ from lens35.constanst import EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER
 from apps.employees.models.employees import Employees
 from rest_framework.decorators import api_view
 from util.http import build_response
+from .helper import update_account_status
 from util.logger import logger
 import traceback
 
@@ -35,6 +36,8 @@ def index(request):
         employee.id_proof_type = document_type
         employee.id_proof_front = front_file_name
         employee.id_proof_back = back_file_name
+
+        update_account_status(employee)
         employee.save()
         response = {
             "front_link": get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER, front_file_name),

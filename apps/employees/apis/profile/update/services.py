@@ -1,6 +1,7 @@
 from apps.employees.models.employees import Employees
 from util.regex import validate_and_format_bool
 from rest_framework.decorators import api_view
+from .helper import update_account_status
 from util.http import build_response
 from util.logger import logger
 import traceback
@@ -26,6 +27,7 @@ def index(request):
         employee.is_drone_photographer = is_drone_photographer
         employee.is_photo_editor = is_photo_editor
         employee.is_video_editor = is_video_editor
+        update_account_status(employee)
         employee.save()
 
         response = {

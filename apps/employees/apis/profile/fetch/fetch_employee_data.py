@@ -30,7 +30,8 @@ def index(request):
             "is_videographer" : employee.is_videographer,
             "is_drone_photographer" : employee.is_drone_photographer,
             "is_photo_editor" : employee.is_photo_editor,
-            "is_video_editor" : employee.is_video_editor
+            "is_video_editor" : employee.is_video_editor,
+            "is_draft" : employee.is_draft
         }
         return build_response(200, "Success", resp)
     except Exception as e_0:

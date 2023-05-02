@@ -31,6 +31,9 @@ class Employees(models.Model):
     is_photo_editor = models.BooleanField(null=False, default=False)
     is_video_editor = models.BooleanField(null=False, default=False)
 
+    #if below flag is true = means the user has not filled all information
+    is_draft = models.BooleanField(null=False, default=True)
+
     class Meta:
         db_table = "employees"
         verbose_name = "employees"
