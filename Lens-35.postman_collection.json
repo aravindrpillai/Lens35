@@ -1272,6 +1272,53 @@
 						},
 						{
 							"name": "Fetch Bookings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"event_date\":\"2023-01-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/bookings/fetch/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"bookings",
+										"fetch",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Booking",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -1304,7 +1351,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/bookings/fetch/",
+									"raw": "{{domain}}/bookings/apis/customers/bookings/fetch/<booking_id>",
 									"host": [
 										"{{domain}}"
 									],
@@ -1314,7 +1361,7 @@
 										"customers",
 										"bookings",
 										"fetch",
-										""
+										"<booking_id>"
 									]
 								}
 							},

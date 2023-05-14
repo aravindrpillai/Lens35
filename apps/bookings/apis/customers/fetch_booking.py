@@ -8,7 +8,7 @@ from util.http import build_response
 from util.logger import logger
 import traceback
 
-@api_view(['POST'])
+@api_view(['GET'])
 def index(request, booking_id):
     try:
         customer_id = request.headers.get("Identifier")
