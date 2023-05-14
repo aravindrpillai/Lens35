@@ -1,10 +1,10 @@
-from apps.bookings.models.service_invoice import ServiceInvoice
+from apps.bookings.models.service_invoice_items import ServiceInvoiceItems
 from apps.bookings.models.transactions import Transactions
+from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
-from django.db.models import Count, Sum
 from util.http import build_response
+from django.db.models import Sum
 from util.logger import logger
-from uuid import UUID
 import traceback
 
 @api_view(['GET'])
@@ -13,20 +13,35 @@ def index(request, booking_id):
         if(booking_id == None or booking_id == ""):
             raise Exception("Booking cannot be empty.")
         customer_id = request.headers.get("Identifier")            
-        invoice_items = []
+        
         total_amount = 0
-        service_invoices = ServiceInvoice.objects.filter(service__booking__booking_id = booking_id, service__booking__customer__customer_id = customer_id).exclude(service__retired=True).values('service__service').annotate(final_amount=Sum('final_amount'))
-        if(not service_invoices.exists()):
-            raise Exception("Access denied. This booking is not associated to you")
-            
-        for invoice in service_invoices:
-            total_amount += invoice['final_amount']
-            invoice_items.append({
-                "category" : "services",
-                "service" : invoice['service__service'],
-                "total_cost" : invoice['final_amount']
+        service_invoices_items = ServiceInvoiceItems.objects.filter(service__booking__booking_id = booking_id, service__booking__customer__customer_id = customer_id)
+        if(not service_invoices_items.exists()):
+            raise Exception("No Services available")
+        
+        service_list = []
+        services = Services.objects.filter(booking__booking_id = booking_id, booking__customer__customer_id = customer_id)
+        for service in services:
+            service_cost = 0
+            invoice_items = []
+            service_invoices_items = ServiceInvoiceItems.objects.filter(service = service)
+            for sii in service_invoices_items:
+                total_amount += sii.cost
+                service_cost += sii.cost
+                invoice_items.append({
+                    "invoice_item_id" : sii.invoice_item_id,
+                    "category" : sii.cost_category,
+                    "description" : sii.description,
+                    "total_cost" : sii.cost
+                })
+            service_list.append({
+                "service_name" : service.service,
+                "employee" : None if service.employee == None else service.employee.full_name,
+                "retired" : service.retired,
+                "service_id" : service.service_id,
+                "invoice_items" : invoice_items,
+                "service_cost" : service_cost
             })
-
         
         already_paid_amount = Transactions.objects.filter(booking__booking_id=booking_id).aggregate(Sum('amount'))['amount__sum']
         
@@ -34,7 +49,7 @@ def index(request, booking_id):
             already_paid_amount = 0
         
         invoice = {
-            "invoice_items" : invoice_items,
+            "services" : service_list,
             "total_service_amount" : total_amount,
             "paid_amount" : already_paid_amount,
             "outstanding_amount" : (total_amount - already_paid_amount) 

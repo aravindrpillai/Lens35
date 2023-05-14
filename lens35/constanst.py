@@ -1,3 +1,4 @@
+CANCELLATION_CHARGE = 200
 PHOTOGRAPHER_RATE_PER_HOUR = 1000
 VIDEOGRAPHER_RATE_PER_HOUR = 1200
 DRONE_RATE_PER_HOUR = 1500
@@ -53,4 +54,10 @@ SERVICES = (
     ("drone_photography", "drone_photography"),
     ("photo_editing", "photo_editing"), 
     ("video_editing", "video_editing")
+)
+
+COST_CATEGORIES = (
+    ("booking_cost", "booking_cost"),
+    ("cancellation_charge", "cancellation_charge"),
+    ("discount", "discount")
 )
