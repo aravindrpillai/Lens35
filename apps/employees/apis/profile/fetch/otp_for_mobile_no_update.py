@@ -21,8 +21,6 @@ def index(request):
                 __save_otp_info(mobile_number=mobile_number, otp=otp)
             else:
                 employee = employee[0]
-                print(employee.employee_id)
-                print(employee_id)
                 if(str(employee.employee_id) == str(employee_id)):
                     return build_response(417, "Same Mobile Number", None)    
                 else:

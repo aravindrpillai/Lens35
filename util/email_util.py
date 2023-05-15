@@ -1,24 +1,29 @@
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from lens35.settings import BASE_DIR
-import os
+from util.property_reader import PropertyReader
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from util.encryption import encrypt
+import smtplib
 
-def send_email(template, template_data, recipient_list, attachments = None):
-    
-    print("{} -- {} -- {} -- {}".format(template, template_data, recipient_list, attachments))
-    subject = 'Subject line of the email'
-    from_email = 'emailforlens35@gmail.com'
-    
-    # Load the HTML and plain text versions of the email message
-    template_file = os.path.join(BASE_DIR, 'static', 'email_templates', 'verify_email_template.html')
-    print(template_file.replace("\\","/")) 
-    html_message = render_to_string(template_file, {'context': 'Your HTML context here'})
-    text_message = strip_tags(html_message)
+def sent_email_verification_email(to_address, user_name, user_type, user_uuid):
+    from_address = PropertyReader.get_property("email", "from_address")
+    subject = 'Lens35 email verification'
 
-    # Create the email message object and specify the HTML and plain text versions
-    msg = EmailMultiAlternatives(subject, text_message, from_email, recipient_list)
-    msg.attach_alternative(html_message, "text/html")
+    with open('static/email_templates/verify_email_template.html', 'r') as html_file:
+        html_content = str(html_file.read())
+        token_string = encrypt("{}#{}".format(user_uuid, to_address))
+        html_content = html_content.replace("__CUSTOMER_NAME__", user_name).replace("__TOKEN__", token_string).replace("__USERTYPE__", user_type)
 
-    # Send the email
-    msg.send()
+    msg = MIMEMultipart()
+    msg['From'] = from_address
+    msg['To'] = to_address
+    msg['Subject'] = subject
+
+    html_part = MIMEText(html_content, 'html')
+    msg.attach(html_part)
+
+    server = smtplib.SMTP(PropertyReader.get_property("email", "smtp"), PropertyReader.get_property("email", "port"))
+    server.starttls()
+    server.login(PropertyReader.get_property("email", "username"), PropertyReader.get_property("email", "password"))
+    server.sendmail(from_address, to_address, msg.as_string())
+    server.quit()
+

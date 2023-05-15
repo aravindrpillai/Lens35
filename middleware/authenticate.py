@@ -14,8 +14,10 @@ class Authenticate():
     excluded_urls = [
       "employees/apis/generate/otp",
       "employees/apis/generate/token",
+      "employees/apis/verify/email",
       "customers/apis/generate/otp",
       "customers/apis/generate/token",
+      "customers/apis/verify/email",
     ]
 
     def __init__(self, get_response):

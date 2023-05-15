@@ -1,7 +1,7 @@
 from util.regex import validate_and_format_email_id
 from apps.employees.models.employees import Employees
 from rest_framework.decorators import api_view
-from util.email_util import send_email
+from util.email_util import sent_email_verification_email
 from util.http import build_response
 from util.logger import logger
 from .helper import update_account_status
@@ -45,7 +45,7 @@ def index(request):
             if(emp.exists()):
                 raise Exception("This Email ID is already used")
             else:
-                #send_email("email_verification_template", {"employee_id":employee_id}, email_id)
+                sent_email_verification_email(email_id, employee.full_name, "employee", employee_id)
                 employee.email_id = email_id
                 employee.email_id_verified = False
                 updated = True

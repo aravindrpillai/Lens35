@@ -2,15 +2,9 @@ from django.urls import path
 from apps.employees.apis.authenticate import generate_otp_api
 from apps.employees.apis.authenticate import generate_token_api
 from apps.employees.apis.profile.fetch import otp_for_mobile_no_update, presigned_url_for_dp_and_idproof, fetch_employee_data
-from apps.employees.apis.profile.update import basic_info, services, portfolios, base_location, mobile_number, profile_picture, id_proof
- 
-from apps.employees import test_api 
+from apps.employees.apis.profile.update import basic_info, services, portfolios, base_location, mobile_number, profile_picture, id_proof, verify_email
 
 urlpatterns = [
-    
-    #TO be removed..
-    path(r'test/', test_api.index, name="URL to push otp"),
-    
 
     #OTP
     path(r'generate/otp/', generate_otp_api.index, name="URL to push otp"),
@@ -19,6 +13,7 @@ urlpatterns = [
     path(r'generate/token/', generate_token_api.index , name="URL to generate token"),
 
     #Profile Update
+    path(r'verify/email/<token>/', verify_email.index , name="URL to verify email"),
     path(r'profile/update/basic/', basic_info.index , name="URL to update basic info"),
     path(r'profile/update/services/', services.index , name="URL to update photographer services"),
     path(r'profile/update/portfolios/', portfolios.index , name="URL to update the portfolios"),

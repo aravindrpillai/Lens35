@@ -1,7 +1,7 @@
 from util.regex import validate_and_format_email_id
 from apps.customers.models.customers import Customers
 from rest_framework.decorators import api_view
-from util.email_util import send_email
+from util.email_util import sent_email_verification_email
 from util.http import build_response
 from util.logger import logger
 import traceback
@@ -31,7 +31,7 @@ def index(request):
             if(cust.exists()):
                 raise Exception("This Email ID is already used")
             else:
-                #send_email("email_verification_template", {"customer_id":customer_id}, email_id)
+                sent_email_verification_email(email_id, customer.full_name, "customer", customer_id)
                 customer.email_id = email_id
                 customer.email_id_verified = False
                 updated = True

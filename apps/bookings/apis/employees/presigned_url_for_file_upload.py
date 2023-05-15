@@ -16,8 +16,6 @@ def index(request):
         file_name = data.get("file_name", None)
         is_photo = data.get("is_photo", None)
 
-        print("{} - {} - {}".format(file_name, mime_type, is_photo))
-
         service = Services.objects.get(service_id = service_id, employee__employee_id = employee_id)
         if(service.retired):
             raise Exception("Cannot upload to this service. Service is expired")

@@ -540,6 +540,65 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Verify Email",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file_name\": \"71c276d6-ab46-4edf-a12c-032ee0eebab3.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/verify/email?u=employee&t=Z0FBQUFBQmtZZ1ZnWnZfUEVrOFFxYXNXc3dVV3BqZVdSNUZFQXZVcjNMYUlxSEgybmdBZTFSQkNCMEZGSWlBbXlGenFwUUV4b3h2NmoyR3dxeno4Qnl3YlhRMjEwRFR3V284ZGRrLWxNWVhOZlpYeHVxLUY2SkFhWUNhMlpmYXAtdWhxU1h0QVhYeTYzUno5UW5LYUhmckFpZnJLSjRvZGEzU0lacVBYaXBNRWdVT0lpMTYtT3lnPQ==",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"verify",
+												"email"
+											],
+											"query": [
+												{
+													"key": "u",
+													"value": "employee"
+												},
+												{
+													"key": "t",
+													"value": "Z0FBQUFBQmtZZ1ZnWnZfUEVrOFFxYXNXc3dVV3BqZVdSNUZFQXZVcjNMYUlxSEgybmdBZTFSQkNCMEZGSWlBbXlGenFwUUV4b3h2NmoyR3dxeno4Qnl3YlhRMjEwRFR3V284ZGRrLWxNWVhOZlpYeHVxLUY2SkFhWUNhMlpmYXAtdWhxU1h0QVhYeTYzUno5UW5LYUhmckFpZnJLSjRvZGEzU0lacVBYaXBNRWdVT0lpMTYtT3lnPQ=="
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						}
@@ -813,6 +872,67 @@
 												"update",
 												"profilepicture",
 												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Verify Email",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Customer_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Customer_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Customer_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file_name\": \"71c276d6-ab46-4edf-a12c-032ee0eebab3.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/customers/apis/verify/email?u=customer&t=encrypted_token",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"customers",
+												"apis",
+												"verify",
+												"email"
+											],
+											"query": [
+												{
+													"key": "u",
+													"value": "customer"
+												},
+												{
+													"key": "t",
+													"value": "encrypted_token"
+												}
 											]
 										}
 									},
