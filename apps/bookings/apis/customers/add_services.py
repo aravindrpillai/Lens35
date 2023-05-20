@@ -1,8 +1,5 @@
-from lens35.constanst import PHOTOGRAPHER_RATE_PER_HOUR, VIDEOGRAPHER_RATE_PER_HOUR, DRONE_RATE_PER_HOUR
-from apps.bookings.helper import create_lifecycle_event, append_with_previous_lifecycle
-from apps.bookings.models.service_invoice_items import ServiceInvoiceItems
+from apps.bookings.helper import create_lifecycle_event, append_with_previous_lifecycle, create_service_invoice_item
 from apps.bookings.apis.customers.fetch_services import fetch_services
-from lens35.constanst import CANCELLATION_CHARGE
 from apps.bookings.models.bookings import Bookings
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
@@ -92,7 +89,7 @@ def __create_service(booking, service_type, count_in_request):
                 break
             service.retired = True
             service.lifecycle = [create_lifecycle_event("Removed {}".format(service_type))]
-            __create_service_invoice_item(service, "cancellation")
+            create_service_invoice_item(service, "cancellation")
             delete_flag -= 1
             service.save()
         
@@ -105,54 +102,7 @@ def __create_service(booking, service_type, count_in_request):
             service.lifecycle = [create_lifecycle_event("Created {}".format(service_type))]
             service.save()
             try:
-                __create_service_invoice_item(service, "booking_cost")
+                create_service_invoice_item(service, "booking_cost")
             except Exception as e_0:
                 service.delete()
                 raise e_0
-
-    
-def __create_service_invoice_item(service, cost_category):
-    initial_service_cost = 0
-    duration = service.booking.event_duration
-    def get_description():
-        if cost_category == "booking_cost":
-            match service.service:
-                case "photography" : return "Photographer (Rs.{} x {}Hrs)".format(PHOTOGRAPHER_RATE_PER_HOUR,duration) 
-                case "videography" : return "Videographer (Rs.{} x {}Hrs)".format(VIDEOGRAPHER_RATE_PER_HOUR,duration) 
-                case "drone_photography" : return "Drone Photographer (Rs.{} x {}Hrs)".format(DRONE_RATE_PER_HOUR,duration) 
-                case "photo_editing" : return "Photo Editor (Rs.{} x {}Hrs)".format(0,duration)  
-                case "video_editing" : return "Video Editor (Rs.{} x {}Hrs)".format(0,duration)  
-                case __ : raise Exception("Failed to rate the service. invalid service code")
-        if cost_category == "cancellation":
-            match service.service:
-                case "photography" : return "Photographer Cancellation Charge (Rs.{})".format(CANCELLATION_CHARGE)
-                case "videography" : return "Photographer Cancellation Charge (Rs.{})".format(CANCELLATION_CHARGE)
-                case "drone_photography" : return "Drone Photographer Cancellation Charge (Rs.{})".format(CANCELLATION_CHARGE)
-                case "photo_editing" : return "PhotoEditor Cancellation Charge (Rs.{})".format(CANCELLATION_CHARGE)
-                case "video_editing" : return "VideoEditor Cancellation Charge (Rs.{})".format(CANCELLATION_CHARGE)
-                case __ : raise Exception("Failed to rate the service. invalid service code")
-            
-        return "TODO ::: ..COST CATEGORY NOT DEFINED.. "
-
-    match service.service:
-        case "photography" : initial_service_cost = PHOTOGRAPHER_RATE_PER_HOUR * duration
-        case "videography" : initial_service_cost = VIDEOGRAPHER_RATE_PER_HOUR * duration
-        case "drone_photography" : initial_service_cost = DRONE_RATE_PER_HOUR * duration
-        case "photo_editing" : initial_service_cost = 0
-        case "video_editing" : initial_service_cost = 0
-        case __ : raise Exception("Failed to rate the service. invalid service code")
-
-    if cost_category == "cancellation":
-        bcs = ServiceInvoiceItems.objects.filter(service=service).filter(Q(cost_category = "booking_cost") | Q(cost_category = "discount"))
-        for bc in bcs:
-            bc.cost = 0#
-            bc.description = bc.description.split("(")[0]+" (cancelled)"
-            bc.save()
-
-    service_invoice_item = ServiceInvoiceItems()
-    service_invoice_item.invoice_item_id = uuid.uuid4()
-    service_invoice_item.service = service
-    service_invoice_item.cost = CANCELLATION_CHARGE if cost_category == "cancellation" else initial_service_cost
-    service_invoice_item.cost_category = cost_category
-    service_invoice_item.description = get_description()
-    service_invoice_item.save()

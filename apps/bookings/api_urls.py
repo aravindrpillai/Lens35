@@ -1,6 +1,8 @@
 from django.urls import path
 from apps.bookings.apis.customers import handle_booking, add_services, remove_services, fetch_services, fetch_booking, fetch_bookings, request_invoice
-from apps.bookings.apis.employees import list_bookings, fetch_booking_info, accept_booking, remove_booking, presigned_url_for_file_upload, acknodwledge_file_upload, fetch_done_bookings_with_pending_file_upload
+from apps.bookings.apis.customers import cancel_booking, calculate_cancellation
+from apps.bookings.apis.employees import list_bookings, fetch_booking_info, accept_booking, remove_booking
+from apps.bookings.apis.employees import presigned_url_for_file_upload, acknodwledge_file_upload, fetch_done_bookings_with_pending_file_upload
 
 urlpatterns = [
     
@@ -12,6 +14,10 @@ urlpatterns = [
     path(r'customers/services/add/', add_services.index, name="URL to add new service(s)"),
     path(r'customers/services/remove/', remove_services.index, name="URL to remove service(s)"),
     path(r'customers/fetch/invoice/<uuid:booking_id>/', request_invoice.index, name="URL to fetch the invoice of a booking"),
+    path(r'customers/calculate/cancellation/<uuid:booking_id>/', calculate_cancellation.index, name="URL to calculate the cancellation charges"),
+    path(r'customers/cancel/booking/<uuid:booking_id>/', cancel_booking.index, name="URL to cancell a booking completely"),
+
+    
     
     #EMPLOYEES - _NOTE_: Start with employees only
     path(r'employees/bookings/list/', list_bookings.index , name="URL to list all bookings"),

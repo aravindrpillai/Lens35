@@ -1631,6 +1631,108 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Calculate Cancellation Cost",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/calculate/cancellation/{{booking_id}}/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"calculate",
+										"cancellation",
+										"{{booking_id}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Booking",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/customers/cancel/booking/{{booking_id}}/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"customers",
+										"cancel",
+										"booking",
+										"{{booking_id}}",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},

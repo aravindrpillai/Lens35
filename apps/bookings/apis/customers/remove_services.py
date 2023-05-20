@@ -8,6 +8,8 @@ from util.logger import logger
 import traceback
 from uuid import UUID
 
+
+#TODO --- VERIFY IF THIS SERVICE IS USED -- > REMOVING IS HANDLED AS PART OF ADD SERVICE ITSELF 
 @api_view(['POST'])
 def index(request):
     try:

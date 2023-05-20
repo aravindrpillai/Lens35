@@ -20,9 +20,11 @@ def index(request):
         
         response = []
         for booking in Bookings.objects.filter(customer__customer_id = customer_id, event_date = event_date):
-        
+            services_arr = Services.objects.filter(booking = booking).exclude(retired = True)
+            if(not services_arr.exists()):
+                continue
             services = []
-            for service in Services.objects.filter(booking = booking).exclude(retired = True):
+            for service in services_arr:
                 employee = None
                 if(service.employee != None):
                     employee = {
