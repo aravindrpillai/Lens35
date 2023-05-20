@@ -6,3 +6,4 @@ pip install psycopg2-binary
 pip install boto3
 pip install googlemaps
 pip install geopy
+pip install cryptography
