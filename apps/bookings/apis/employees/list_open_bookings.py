@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from util.http import build_response
 from django.utils import timezone
 from util.logger import logger
+from django.db.models import Q
 from datetime import datetime
 import traceback
 
@@ -15,8 +16,14 @@ def index(request):
     try:
         employee_id = request.headers.get("Identifier")
         employee = Employees.objects.get(employee_id = employee_id)
-        data = request.data
+
+        if(employee.is_draft):
+            raise Exception("Your profile is not updated fully. Please update yor profile to accept bookings")
+        if(not employee.profile_approved):
+            raise Exception("Your profile is not approved. This may take upto a week to get approved. If you are facing the issue even after a week, please contact the support" )
         
+
+        data = request.data
         event_date = data.get("event_date", None)
         distance_range = data.get("distance_range", None)
         distance_range = DEFAULT_BOOKING_RANGE_IN_KM if (distance_range == None or distance_range == "") else distance_range
@@ -53,15 +60,16 @@ def index(request):
             if(employee.is_video_editor):
                 service_code_array.append("video_editing")
         
-        bookings = Bookings.objects.filter(services__service__in=service_code_array, event_date = event_date).exclude(services__employee__isnull=False, services__retired=True).distinct()
-        
+        bookings = Bookings.objects.filter(services__service__in=service_code_array, event_date = event_date).distinct()
         response = []
         done_booking_id = []
         for booking in bookings:
+            services = Services.objects.filter(booking = booking, employee = None).exclude(Q(closed = True) | Q(retired = True)).values_list('service', flat=True).distinct()
+            if(not services.exists()):
+                continue
             distance = get_distance_bw_cordinates((booking.event_latitude, booking.event_longitude), (employee.base_location_latitude, employee.base_location_longitude))
             if(booking.booking_id in done_booking_id or distance > distance_range):
                 continue
-            services = Services.objects.filter(booking = booking, employee = None).exclude(retired = True).values_list('service', flat=True).distinct()
             response.append({
                 "booking_id" : booking.booking_id,
                 "event" : booking.event,
