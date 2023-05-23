@@ -1,4 +1,5 @@
 from django.db import models
+from .employee_bank_details import EmployeeBankDetails
 
 class Employees(models.Model):
     employee_id = models.UUIDField(unique=True)
@@ -34,6 +35,9 @@ class Employees(models.Model):
     #if below flag is true = means the user has not filled all information
     is_draft = models.BooleanField(null=False, default=True)
 
+
+    #Employee Bank Info
+    bank_info = models.ForeignKey(EmployeeBankDetails, null=True, on_delete=models.CASCADE)
     class Meta:
         db_table = "employees"
         verbose_name = "employees"

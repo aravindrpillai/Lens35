@@ -1,6 +1,7 @@
 from django.urls import path
 from apps.employees.apis.authenticate import generate_otp_api
 from apps.employees.apis.authenticate import generate_token_api
+from apps.employees.apis.wallet import fetch_bank_info, update_bank_info 
 from apps.employees.apis.profile.fetch import otp_for_mobile_no_update, presigned_url_for_dp_and_idproof, fetch_employee_data
 from apps.employees.apis.profile.update import basic_info, services, portfolios, base_location, mobile_number, profile_picture, id_proof, verify_email
 
@@ -27,12 +28,8 @@ urlpatterns = [
     path(r'profile/fetch/presigned/url/', presigned_url_for_dp_and_idproof.index , name="URL to get presigned url for file upload"),
     path(r'profile/fetch/info/', fetch_employee_data.index , name="URL to fetch the employee data"),
 
-    
-
-   
-    
-    
-    
-       
+    #Wallet
+    path(r'wallet/fetch/bank/info/', fetch_bank_info.index , name="URL to fetch the employee bank info"),
+    path(r'wallet/update/bank/info/', update_bank_info.index , name="URL to update the employee bank info"),     
    
 ]

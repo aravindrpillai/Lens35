@@ -718,6 +718,116 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "wallet",
+					"item": [
+						{
+							"name": "Get Bank Information",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/wallet/fetch/bank/info/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"wallet",
+										"fetch",
+										"bank",
+										"info",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Bank Information",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"bank\": \"SBI\",\r\n    \"branch\": \"Anchal\",\r\n    \"ifsc\": \"SBI0001234\",\r\n    \"account_holder\": \"Aravind R Pilai\",\r\n    \"mobile_number\": \"9447020535\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/wallet/update/bank/info/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"wallet",
+										"update",
+										"bank",
+										"info",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -1923,7 +2033,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/employees/bookings/list/",
+									"raw": "{{domain}}/bookings/apis/employees/open/bookings/",
 									"host": [
 										"{{domain}}"
 									],
@@ -1931,8 +2041,8 @@
 										"bookings",
 										"apis",
 										"employees",
+										"open",
 										"bookings",
-										"list",
 										""
 									]
 								}
@@ -1980,6 +2090,53 @@
 										"employees",
 										"bookings",
 										"accept",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "My Bookings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"event_date\": \"2023-03-23\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/bookings/apis/employees/my/bookings/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"bookings",
+										"apis",
+										"employees",
+										"my",
+										"bookings",
 										""
 									]
 								}
