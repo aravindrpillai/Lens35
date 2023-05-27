@@ -1,6 +1,6 @@
 from django.urls import path
 from apps.bookings.apis.customers import handle_booking, add_services, remove_services, fetch_services, fetch_booking, fetch_bookings, request_invoice
-from apps.bookings.apis.customers import cancel_booking, calculate_cancellation
+from apps.bookings.apis.customers import cancel_booking, calculate_cancellation, fetch_files_uploaded
 from apps.bookings.apis.employees.my_bookings import list_my_bookings ,remove_booking
 from apps.bookings.apis.employees.open_bookings import accept_booking, list_open_bookings
 from apps.bookings.apis.employees.file_upload import fetch_done_bookings_with_pending_file_upload, fetch_files_from_service, delete_file
@@ -12,6 +12,7 @@ urlpatterns = [
     path(r'customers/booking/', handle_booking.index, name="URL to add or update booking"),
     path(r'customers/bookings/fetch/', fetch_bookings.index, name="URL to fetch all the bookings of a customer"),
     path(r'customers/booking/fetch/<uuid:booking_id>/', fetch_booking.index, name="URL to fetch the booking info using booking id"),
+    path(r'customers/services/fetch/files/<uuid:service_id>/', fetch_files_uploaded.index, name="URL to fetch files of a service"),
     path(r'customers/services/fetch/<uuid:booking_id>/', fetch_services.index, name="URL to fetch all the service of a booking"),
     path(r'customers/services/add/', add_services.index, name="URL to add new service(s)"),
     path(r'customers/services/remove/', remove_services.index, name="URL to remove service(s)"),

@@ -14,6 +14,7 @@ from uuid import UUID
 def index(request):
     try:
         data = request.data
+        customer_id = request.headers.get("Identifier")    
         booking_id = data.get("booking_id",None)
         booking = Bookings.objects.get(booking_id = UUID(booking_id, version=4))
         service_id_list = data.get("service_id_list",[])  
@@ -33,7 +34,7 @@ def index(request):
             booking.lifecycle = append_with_previous_lifecycle(booking.lifecycle, life_cycle_event)
             booking.save()
 
-        return build_response(202, "Success", fetch_services(booking_id))
+        return build_response(202, "Success", fetch_services(booking_id, customer_id))
     except Exception as e_0:
         logger.error('Failed to remove services of booking {}\n{}'.format(booking_id, traceback.format_exc()))
         return build_response(400, str(e_0))
