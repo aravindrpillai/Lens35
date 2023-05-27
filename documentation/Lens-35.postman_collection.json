@@ -1924,7 +1924,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"service_id\": \"12334\",\r\n    \"mime_type\": \"image/jpeg\",\r\n    \"file_name\": \"file_name.jpeg\",\r\n    \"uploaded\": true\r\n}",
+											"raw": "{\r\n    \"service_id\": \"12334\",\r\n    \"file_id\" : \"a uuid generated from the UI\",\r\n    \"mime_type\": \"image/jpeg\",\r\n    \"file_name\": \"file_name.jpeg\",\r\n    \"uploaded\": true\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1994,6 +1994,106 @@
 												"fetch",
 												"bookings",
 												"withpendingfileupload",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Fetch Uploaded FIles",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/bookings/apis/employees/bookings/fetch/uploadedfiles/ef781b40-60cb-4805-bcc3-c878cbe5f483/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"bookings",
+												"apis",
+												"employees",
+												"bookings",
+												"fetch",
+												"uploadedfiles",
+												"ef781b40-60cb-4805-bcc3-c878cbe5f483",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Files",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"file_ids\":[\r\n        \"UUID_LIST\"\r\n    ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/bookings/apis/employees/bookings/file/delete/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"bookings",
+												"apis",
+												"employees",
+												"bookings",
+												"file",
+												"delete",
 												""
 											]
 										}
