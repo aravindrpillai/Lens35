@@ -33,5 +33,5 @@ def __get_dp_url(file_name):
     if(file_name == None or file_name == ""):
         return None
     else:
-        url = get_presigned_url_to_access_object(CUSTOMERS_BUCKET, CUSTOMERS_DP_FOLDER, file_name)
+        url = get_presigned_url_to_access_object(CUSTOMERS_BUCKET, CUSTOMERS_DP_FOLDER, file_name, "image/jpeg")
         return url

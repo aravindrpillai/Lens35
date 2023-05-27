@@ -22,7 +22,7 @@ def get_presigned_url_to_push_object(bucket_name, folder_name, file_name, url_va
     }
 
 
-def get_presigned_url_to_access_object(bucket_name, folder_name, file_name, url_valid_for=30):
+def get_presigned_url_to_access_object(bucket_name, folder_name, file_name, mime_type, url_valid_for=30):
     s3 = __get_s3_client()
     key = "{}/{}".format(folder_name, file_name)
 
@@ -32,7 +32,8 @@ def get_presigned_url_to_access_object(bucket_name, folder_name, file_name, url_
             'Bucket': bucket_name,
             'Key': key,
             'ResponseExpires': url_valid_for,
-            'ResponseContentDisposition' : 'inline'
+            'ResponseContentDisposition' : 'inline',
+            'ResponseContentType': mime_type
         }
     )
     return url

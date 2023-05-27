@@ -17,7 +17,7 @@ def index(request):
         if(employee.display_picture == file_name):
             link = None 
             if (employee.display_picture != None):
-                link = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, employee.display_picture)
+                link = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, employee.display_picture, "image/jpeg")
             return build_response(200, "No Change in DP", {"link": link})
         
         if(employee.display_picture != None):
@@ -31,7 +31,7 @@ def index(request):
         else:
             employee.display_picture = file_name
             employee.save()
-            new_link = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, file_name)
+            new_link = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_DP_FOLDER, file_name, "image/jpeg")
             return build_response(202, "DP updated successfully", {"link": new_link})
         
     except Exception as e_0:

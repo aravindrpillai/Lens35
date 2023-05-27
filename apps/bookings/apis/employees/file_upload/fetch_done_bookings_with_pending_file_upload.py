@@ -2,24 +2,31 @@ from apps.bookings.models.bookings import Bookings
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
 from util.http import build_response
+from django.utils import timezone
 from util.logger import logger
 import traceback
-import json
 
 @api_view(['GET'])
 def index(request):
     try:
         employee_id = request.headers.get("Identifier")
         added_bookings = []
-        bookings = Bookings.objects.filter(services__employee__employee_id = employee_id).exclude(services__closed=True).exclude(services__retired=True)
+
+        bookings = Bookings.objects.filter(
+            services__employee__employee_id=employee_id,
+            services__retired=False,
+            event_date__lte = timezone.localdate()
+        ).distinct()
+        
         response_data = []
         for booking in bookings:
             if(not (booking.booking_id in added_bookings)):
                 services = []
-                for service in Services.objects.filter(booking=booking, employee__employee_id = employee_id).exclude(closed=True).exclude(retired=True):
+                for service in Services.objects.filter(booking=booking, employee__employee_id = employee_id).exclude(retired=True):
                     services.append({
                         "service_id" : service.service_id,
-                        "service" : service.service
+                        "service" : service.service,
+                        "closed" : service.closed
                     })
                 response_data.append({
                     "booking_id" : booking.booking_id,

@@ -40,8 +40,8 @@ def index(request):
         update_account_status(employee)
         employee.save()
         response = {
-            "front_link": get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER, front_file_name),
-            "back_link": get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER, back_file_name)
+            "front_link": get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER, front_file_name, "image/jpeg"),
+            "back_link": get_presigned_url_to_access_object(EMPLOYEES_BUCKET, EMPLOYEES_ID_PROOF_FOLDER, back_file_name, "image/jpeg")
         }
         return build_response(201, "ID Proof updated successfully", response)
         

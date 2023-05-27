@@ -47,5 +47,5 @@ def __get_file_url(file_name, type):
         return None
     else:
         folder = EMPLOYEES_DP_FOLDER if (type == "display_picture") else EMPLOYEES_ID_PROOF_FOLDER
-        url = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, folder, file_name)
+        url = get_presigned_url_to_access_object(EMPLOYEES_BUCKET, folder, file_name, "image/jpeg")
         return url
