@@ -17,9 +17,9 @@ def index(request):
         data = request.data
         event_date = data.get("event_date", None)
         event_date = timezone.now().date() if (event_date == None or event_date == "") else datetime.fromisoformat(event_date).date()
-        
+        bookings = Bookings.objects.filter(customer__customer_id = customer_id, event_date = event_date)
         response = []
-        for booking in Bookings.objects.filter(customer__customer_id = customer_id, event_date = event_date):
+        for booking in bookings:
             services_arr = Services.objects.filter(booking = booking).exclude(retired = True)
             if(not services_arr.exists()):
                 continue
