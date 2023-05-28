@@ -2053,6 +2053,58 @@
 									"response": []
 								},
 								{
+									"name": "Lock Service",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Token",
+												"value": "{{Employee_Token}}",
+												"type": "text"
+											},
+											{
+												"key": "Device-Id",
+												"value": "{{Employee_Device_Id}}",
+												"type": "text"
+											},
+											{
+												"key": "Identifier",
+												"value": "{{Employee_Identifier}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/bookings/apis/employees/bookings/services/lock/ef781b40-60cb-4805-bcc3-c878cbe5f483/",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"bookings",
+												"apis",
+												"employees",
+												"bookings",
+												"services",
+												"lock",
+												"ef781b40-60cb-4805-bcc3-c878cbe5f483",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "Delete Files",
 									"request": {
 										"method": "POST",
