@@ -22,7 +22,6 @@ def index(request):
         if(not employee.profile_approved):
             raise Exception("Your profile is not approved. This may take upto a week to get approved. If you are facing the issue even after a week, please contact the support" )
         
-
         data = request.data
         event_date = data.get("event_date", None)
         distance_range = data.get("distance_range", None)
@@ -30,6 +29,10 @@ def index(request):
         event_date = timezone.now().date() if (event_date == None or event_date == "") else datetime.fromisoformat(event_date).date()
         if(event_date < datetime.now().date()):
             raise Exception("Event date must be on or after today")
+        
+        events_array = data.get("events", [])
+        if(not events_array):
+            raise Exception("Select atleast one service")
         
         photography = data.get("photography", None)# and employee.is_photographer
         videography = data.get("videography", None) #and employee.is_videographer
@@ -49,18 +52,9 @@ def index(request):
         if(video_editing):
             service_code_array.append("video_editing")
         if(not service_code_array):
-            if(employee.is_photographer):
-                service_code_array.append("photography")
-            if(employee.is_videographer):
-                service_code_array.append("videography")
-            if(employee.is_drone_photographer):
-                service_code_array.append("drone_photography")
-            if(employee.is_photo_editor):
-                service_code_array.append("photo_editing")
-            if(employee.is_video_editor):
-                service_code_array.append("video_editing")
+            raise Exception("No Services selected")
         
-        bookings = Bookings.objects.filter(services__service__in=service_code_array, event_date = event_date).distinct()
+        bookings = Bookings.objects.filter(event__in=events_array, services__service__in=service_code_array, event_date = event_date).distinct()
         response = []
         done_booking_id = []
         for booking in bookings:

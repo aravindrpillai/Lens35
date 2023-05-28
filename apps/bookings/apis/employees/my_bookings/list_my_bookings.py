@@ -1,10 +1,9 @@
+from util.google_maps import get_distance_bw_cordinates
 from apps.employees.models.employees import Employees
 from apps.bookings.models.services import Services
 from apps.bookings.models.bookings import Bookings
-from util.google_maps import get_distance_bw_cordinates
 from rest_framework.decorators import api_view
 from util.http import build_response
-from django.utils import timezone
 from util.logger import logger
 from datetime import datetime
 import traceback
@@ -17,8 +16,17 @@ def index(request):
         data = request.data
         
         event_date = data.get("event_date", None)
-        event_date = timezone.now().date() if (event_date == None or event_date == "") else datetime.fromisoformat(event_date).date()
+        if(event_date == None):
+            raise Exception("Date cannot be empty")
+        event_date_split = event_date.split("-")
+        year = event_date_split[0]
+        month = event_date_split[1]
+        target_event_date = datetime.strptime(f'{year}-{month}', '%Y-%m')
         
+        events_array = data.get("events", [])
+        if(not events_array):
+            raise Exception("Select atleast one service")
+
         photography = data.get("photography", None)# and employee.is_photographer
         videography = data.get("videography", None) #and employee.is_videographer
         drone_photography = data.get("drone_photography", None)# and employee.is_drone_photographer
@@ -37,18 +45,9 @@ def index(request):
         if(video_editing):
             service_code_array.append("video_editing")
         if(not service_code_array):
-            if(employee.is_photographer):
-                service_code_array.append("photography")
-            if(employee.is_videographer):
-                service_code_array.append("videography")
-            if(employee.is_drone_photographer):
-                service_code_array.append("drone_photography")
-            if(employee.is_photo_editor):
-                service_code_array.append("photo_editing")
-            if(employee.is_video_editor):
-                service_code_array.append("video_editing")
+            raise Exception("No service selected")
         
-        bookings = Bookings.objects.filter(services__service__in=service_code_array, event_date = event_date).distinct()
+        bookings = Bookings.objects.filter(event__in=events_array, services__service__in=service_code_array, event_date__year=target_event_date.year, event_date__month=target_event_date.month).distinct()
         
         response = []
         done_booking_id = []

@@ -5,7 +5,6 @@ from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view
 from util.http import build_response
-from django.utils import timezone
 from util.logger import logger
 from datetime import datetime
 import traceback
@@ -16,8 +15,14 @@ def index(request):
         customer_id = request.headers.get("Identifier")
         data = request.data
         event_date = data.get("event_date", None)
-        event_date = timezone.now().date() if (event_date == None or event_date == "") else datetime.fromisoformat(event_date).date()
-        bookings = Bookings.objects.filter(customer__customer_id = customer_id, event_date = event_date)
+        if(event_date == None):
+            raise Exception("Date cannot be empty")
+        event_date_split = event_date.split("-")
+        year = event_date_split[0]
+        month = event_date_split[1]
+        target_event_date = datetime.strptime(f'{year}-{month}', '%Y-%m')
+
+        bookings = Bookings.objects.filter(customer__customer_id = customer_id, event_date__year=target_event_date.year, event_date__month=target_event_date.month)
         response = []
         for booking in bookings:
             services_arr = Services.objects.filter(booking = booking).exclude(retired = True)
