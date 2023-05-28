@@ -100,8 +100,8 @@ def index(request):
 
         #Booking Duration
         if(event_duration != None and event_duration != ""):
-            if(event_duration < 2):
-                raise Exception("Minimum Booking must be for 2 Hours")
+            if(event_duration < 1):
+                raise Exception("Minimum Booking must be for 1 Hours")
             if(event_duration > 8):
                 raise Exception("Booking cannot exceed 8 Hours")
             if(is_booking_update):
