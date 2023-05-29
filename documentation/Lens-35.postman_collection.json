@@ -828,6 +828,604 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "file_upload",
+					"item": [
+						{
+							"name": "Fetch Presigned URL",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"service_id\":\"1111-222-333-444-555\",\r\n    \"file_name\" : \"IMG_001.jpeg\",\r\n    \"mime_type\" : \"image/jpeg\",\r\n    \"is_photo\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/generate/presignedurl/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"generate",
+										"presignedurl",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Acknodwledge File Upload",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"service_id\": \"12334\",\r\n    \"file_id\" : \"a uuid generated from the UI\",\r\n    \"mime_type\": \"image/jpeg\",\r\n    \"file_name\": \"file_name.jpeg\",\r\n    \"uploaded\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/acknodwledge/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"acknodwledge",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Booking Info",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/fetch/bookings/<BOOKING_UUID>",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"fetch",
+										"bookings",
+										"<BOOKING_UUID>"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch  Booking With Pending File Upload Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/fetch/bookings/withpendingfileupload/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"fetch",
+										"bookings",
+										"withpendingfileupload",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Uploaded FIles",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/fetch/uploadedfiles/ef781b40-60cb-4805-bcc3-c878cbe5f483/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"fetch",
+										"uploadedfiles",
+										"ef781b40-60cb-4805-bcc3-c878cbe5f483",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lock Service",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/service/lock/ef781b40-60cb-4805-bcc3-c878cbe5f483/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"service",
+										"lock",
+										"ef781b40-60cb-4805-bcc3-c878cbe5f483",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Files",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"file_ids\":[\r\n        \"UUID_LIST\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/fileupload/delete/file/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"fileupload",
+										"delete",
+										"file",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "my_bookings",
+					"item": [
+						{
+							"name": "My Bookings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"event_date\": \"2023-03\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/mybookings/list/bookings/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"mybookings",
+										"list",
+										"bookings",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Services Open for Update",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"event_date\": \"2023-03\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/mybookings/list/services/openforupdate/{{booking_id}}/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"mybookings",
+										"list",
+										"services",
+										"openforupdate",
+										"{{booking_id}}",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Booking Services",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": \"a617fafc-480f-4248-98de-c03433845bce\",\r\n    \"service_ids\": [\r\n        \"90834251-bd8c-4451-ab9c-0018107cadca\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/mybookings/update/booking/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"mybookings",
+										"update",
+										"booking",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "open_bookings",
+					"item": [
+						{
+							"name": "List Open Bookings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"distance_range\":50,\r\n    \"event_date\": \"2023-03-23\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/openbookings/list/all/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"openbookings",
+										"list",
+										"all",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept Booking Service",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Employee_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Employee_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Employee_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"booking_id\": \"a617fafc-480f-4248-98de-c03433845bce\",\r\n    \"service_id_list\": [\r\n        \"90834251-bd8c-4451-ab9c-0018107cadca\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/employees/apis/openbookings/accept/service/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"employees",
+										"apis",
+										"openbookings",
+										"accept",
+										"service",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -1353,40 +1951,9 @@
 							"response": []
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "generic",
-			"item": [
+				},
 				{
-					"name": "PostaCode API",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://postalpincode.in/api/pincode/691303",
-							"protocol": "http",
-							"host": [
-								"postalpincode",
-								"in"
-							],
-							"path": [
-								"api",
-								"pincode",
-								"691303"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "bookings",
-			"item": [
-				{
-					"name": "customers",
+					"name": "bookings",
 					"item": [
 						{
 							"name": "Handle Booking",
@@ -1435,15 +2002,62 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/booking/",
+									"raw": "{{domain}}/customers/apis/booking/update/",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
-										"bookings",
-										"apis",
 										"customers",
+										"apis",
 										"booking",
+										"update",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Fetch Bookings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "{{Customer_Token}}",
+										"type": "text"
+									},
+									{
+										"key": "Device-Id",
+										"value": "{{Customer_Device_Id}}",
+										"type": "text"
+									},
+									{
+										"key": "Identifier",
+										"value": "{{Customer_Identifier}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"event_date\":\"2023-01-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/customers/apis/booking/fetch/bookings/",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"customers",
+										"apis",
+										"booking",
+										"fetch",
+										"bookings",
 										""
 									]
 								}
@@ -1484,64 +2098,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/services/fetch/{{booking_id}}",
+									"raw": "{{domain}}/customers/apis/booking/fetch/services/{{booking_id}}",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
-										"bookings",
-										"apis",
 										"customers",
+										"apis",
+										"booking",
+										"fetch",
 										"services",
-										"fetch",
 										"{{booking_id}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Fetch Bookings",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Customer_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Customer_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Customer_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"event_date\":\"2023-01-01\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/bookings/fetch/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"customers",
-										"bookings",
-										"fetch",
-										""
 									]
 								}
 							},
@@ -1581,17 +2148,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/bookings/fetch/<booking_id>",
+									"raw": "{{domain}}/customers/apis/booking/fetch/booking/{{booking_id}}",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
-										"bookings",
-										"apis",
 										"customers",
-										"bookings",
+										"apis",
+										"booking",
 										"fetch",
-										"<booking_id>"
+										"booking",
+										"{{booking_id}}"
 									]
 								}
 							},
@@ -1631,18 +2198,17 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/fetch/invoice/d6c85f9d-c92c-4f23-9db5-1ef143acb1d6/",
+									"raw": "{{domain}}/customers/apis/bookings/fetch/invoice/{{booking_id}}",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
-										"bookings",
-										"apis",
 										"customers",
+										"apis",
+										"bookings",
 										"fetch",
 										"invoice",
-										"d6c85f9d-c92c-4f23-9db5-1ef143acb1d6",
-										""
+										"{{booking_id}}"
 									]
 								}
 							},
@@ -1679,14 +2245,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/services/add/",
+									"raw": "{{domain}}/customers/apis/booking/services/add/",
 									"host": [
 										"{{domain}}"
 									],
 									"path": [
-										"bookings",
-										"apis",
 										"customers",
+										"apis",
+										"booking",
 										"services",
 										"add",
 										""
@@ -1694,54 +2260,12 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Remove Services",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Customer_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Customer_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Customer_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"booking_id\": \"{{booking_id}}\",\r\n    \"service_id_list\" : [\r\n        \"ee4d0298-652b-44a8-a48c-a88e198f01e2\"   \r\n    ]\r\n}\r\n\r\n            ",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/customers/services/remove/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"customers",
-										"services",
-										"remove",
-										""
-									]
-								}
-							},
-							"response": []
-						},
+						}
+					]
+				},
+				{
+					"name": "booking_cancellation",
+					"item": [
 						{
 							"name": "Calculate Cancellation Cost",
 							"protocolProfileBehavior": {
@@ -1845,555 +2369,32 @@
 							"response": []
 						}
 					]
-				},
+				}
+			]
+		},
+		{
+			"name": "generic",
+			"item": [
 				{
-					"name": "employees",
-					"item": [
-						{
-							"name": "file_upload",
-							"item": [
-								{
-									"name": "Fetch Presigned URL",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Token",
-												"value": "{{Employee_Token}}",
-												"type": "text"
-											},
-											{
-												"key": "Device-Id",
-												"value": "{{Employee_Device_Id}}",
-												"type": "text"
-											},
-											{
-												"key": "Identifier",
-												"value": "{{Employee_Identifier}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"service_id\":\"1111-222-333-444-555\",\r\n    \"file_name\" : \"IMG_001.jpeg\",\r\n    \"mime_type\" : \"image/jpeg\",\r\n    \"is_photo\" : true\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{domain}}/bookings/apis/employees/bookings/fileupload/fetch/presignedurl/",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"bookings",
-												"apis",
-												"employees",
-												"bookings",
-												"fileupload",
-												"fetch",
-												"presignedurl",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Acknodwledge File Upload",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Token",
-												"value": "{{Employee_Token}}",
-												"type": "text"
-											},
-											{
-												"key": "Device-Id",
-												"value": "{{Employee_Device_Id}}",
-												"type": "text"
-											},
-											{
-												"key": "Identifier",
-												"value": "{{Employee_Identifier}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"service_id\": \"12334\",\r\n    \"file_id\" : \"a uuid generated from the UI\",\r\n    \"mime_type\": \"image/jpeg\",\r\n    \"file_name\": \"file_name.jpeg\",\r\n    \"uploaded\": true\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{domain}}/bookings/apis/employees/bookings/fileupload/acknodwledge/",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"bookings",
-												"apis",
-												"employees",
-												"bookings",
-												"fileupload",
-												"acknodwledge",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Fetch  Booking With Pending File Upload",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Token",
-												"value": "{{Employee_Token}}",
-												"type": "text"
-											},
-											{
-												"key": "Device-Id",
-												"value": "{{Employee_Device_Id}}",
-												"type": "text"
-											},
-											{
-												"key": "Identifier",
-												"value": "{{Employee_Identifier}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{domain}}/bookings/apis/employees/fetch/bookings/withpendingfileupload/",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"bookings",
-												"apis",
-												"employees",
-												"fetch",
-												"bookings",
-												"withpendingfileupload",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Fetch Uploaded FIles",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Token",
-												"value": "{{Employee_Token}}",
-												"type": "text"
-											},
-											{
-												"key": "Device-Id",
-												"value": "{{Employee_Device_Id}}",
-												"type": "text"
-											},
-											{
-												"key": "Identifier",
-												"value": "{{Employee_Identifier}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{domain}}/bookings/apis/employees/bookings/fetch/uploadedfiles/ef781b40-60cb-4805-bcc3-c878cbe5f483/",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"bookings",
-												"apis",
-												"employees",
-												"bookings",
-												"fetch",
-												"uploadedfiles",
-												"ef781b40-60cb-4805-bcc3-c878cbe5f483",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Lock Service",
-									"protocolProfileBehavior": {
-										"disableBodyPruning": true
-									},
-									"request": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Token",
-												"value": "{{Employee_Token}}",
-												"type": "text"
-											},
-											{
-												"key": "Device-Id",
-												"value": "{{Employee_Device_Id}}",
-												"type": "text"
-											},
-											{
-												"key": "Identifier",
-												"value": "{{Employee_Identifier}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{domain}}/bookings/apis/employees/bookings/services/lock/ef781b40-60cb-4805-bcc3-c878cbe5f483/",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"bookings",
-												"apis",
-												"employees",
-												"bookings",
-												"services",
-												"lock",
-												"ef781b40-60cb-4805-bcc3-c878cbe5f483",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Delete Files",
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Token",
-												"value": "{{Employee_Token}}",
-												"type": "text"
-											},
-											{
-												"key": "Device-Id",
-												"value": "{{Employee_Device_Id}}",
-												"type": "text"
-											},
-											{
-												"key": "Identifier",
-												"value": "{{Employee_Identifier}}",
-												"type": "text"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n    \"file_ids\":[\r\n        \"UUID_LIST\"\r\n    ]\r\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{domain}}/bookings/apis/employees/bookings/file/delete/",
-											"host": [
-												"{{domain}}"
-											],
-											"path": [
-												"bookings",
-												"apis",
-												"employees",
-												"bookings",
-												"file",
-												"delete",
-												""
-											]
-										}
-									},
-									"response": []
-								}
+					"name": "PostaCode API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://postalpincode.in/api/pincode/691303",
+							"protocol": "http",
+							"host": [
+								"postalpincode",
+								"in"
+							],
+							"path": [
+								"api",
+								"pincode",
+								"691303"
 							]
-						},
-						{
-							"name": "List Open Bookings",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Employee_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Employee_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Employee_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"distance_range\":50,\r\n    \"event_date\": \"2023-03-23\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/employees/open/bookings/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"employees",
-										"open",
-										"bookings",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Accept Booking",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Employee_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Employee_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Employee_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"booking_id\": \"a617fafc-480f-4248-98de-c03433845bce\",\r\n    \"service_id_list\": [\r\n        \"90834251-bd8c-4451-ab9c-0018107cadca\"\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/employees/bookings/accept/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"employees",
-										"bookings",
-										"accept",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "My Bookings",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Employee_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Employee_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Employee_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"event_date\": \"2023-03-23\",\r\n    \"photography\" : true,\r\n    \"videography\" : true,\r\n    \"drone_photography\" : true,\r\n    \"photo_editing\" : true,\r\n    \"video_editing\" : true\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/employees/my/bookings/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"employees",
-										"my",
-										"bookings",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Remove Booking",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Employee_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Employee_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Employee_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"booking_id\": \"a617fafc-480f-4248-98de-c03433845bce\",\r\n    \"service_id_list\": [\r\n        \"90834251-bd8c-4451-ab9c-0018107cadca\"\r\n    ]\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/employees/bookings/remove/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"employees",
-										"bookings",
-										"remove",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Fetch  Booking",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Token",
-										"value": "{{Employee_Token}}",
-										"type": "text"
-									},
-									{
-										"key": "Device-Id",
-										"value": "{{Employee_Device_Id}}",
-										"type": "text"
-									},
-									{
-										"key": "Identifier",
-										"value": "{{Employee_Identifier}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{domain}}/bookings/apis/employees/bookings/fetch/dd4eb99b-c6f6-481a-9b88-02d03f961166/",
-									"host": [
-										"{{domain}}"
-									],
-									"path": [
-										"bookings",
-										"apis",
-										"employees",
-										"bookings",
-										"fetch",
-										"dd4eb99b-c6f6-481a-9b88-02d03f961166",
-										""
-									]
-								}
-							},
-							"response": []
 						}
-					]
+					},
+					"response": []
 				}
 			]
 		}
