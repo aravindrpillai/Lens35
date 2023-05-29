@@ -39,7 +39,7 @@ class Authenticate():
                 return self.get_response(request)
         
         url_segments = full_path.replace("https://", "").replace("http://", "").split('/')
-        usertype = (url_segments[1] if(url_segments[1] != "bookings") else url_segments[3]).lower()
+        usertype = url_segments[1].lower()
         headers = request.headers
         token = headers.get('Token', None)
         identifier = headers.get('Identifier', None)

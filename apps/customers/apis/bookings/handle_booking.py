@@ -1,4 +1,4 @@
-from apps.bookings.helper import append_with_previous_lifecycle, create_lifecycle_event 
+from apps.customers.helper import append_with_previous_lifecycle, create_lifecycle_event 
 from apps.customers.models.customers import Customers
 from util.regex import validate_and_format_pincode
 from apps.bookings.models.bookings import Bookings

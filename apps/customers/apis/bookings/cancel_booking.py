@@ -1,4 +1,4 @@
-from apps.bookings.helper import create_lifecycle_event, create_service_invoice_item
+from apps.customers.helper import create_lifecycle_event, create_service_invoice_item
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
 from util.http import build_response

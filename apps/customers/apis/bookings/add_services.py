@@ -1,5 +1,5 @@
-from apps.bookings.helper import create_lifecycle_event, append_with_previous_lifecycle, create_service_invoice_item
-from apps.bookings.apis.customers.fetch_services import fetch_services
+from apps.customers.helper import create_lifecycle_event, append_with_previous_lifecycle, create_service_invoice_item
+from apps.customers.apis.bookings.fetch_services import fetch_services
 from apps.bookings.models.bookings import Bookings
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
