@@ -16,13 +16,13 @@ def index(request, booking_id):
         employee_id = request.headers.get("Identifier")
         employee = Employees.objects.get(employee_id = employee_id)
         booking = Bookings.objects.get(booking_id = booking_id)
-        
+
         distance = get_distance_bw_cordinates((booking.event_latitude, booking.event_longitude), (employee.base_location_latitude, employee.base_location_longitude))
         services = []
         for service in Services.objects.filter(booking = booking).exclude(retired = True):
-            employee = None
+            employee_json = None
             if(service.employee != None):
-                employee = {
+                employee_json = {
                     "employee_id" : service.employee.employee_id, 
                     "full_name" : service.employee.full_name,
                     "profile_name" : service.employee.profile_name,
@@ -31,7 +31,8 @@ def index(request, booking_id):
             services.append({
                     "service_id" : service.service_id,
                     "service" : service.service,
-                    "employee" : employee
+                    "does_this_employee_offer_this_service" : __does_this_employee_offer_this_service(employee, service.service),
+                    "employee" : employee_json
                 })
 
         response = {
@@ -74,3 +75,10 @@ def __get_dp_url(file_name, user):
         if(user == "customer"):
             return get_presigned_url_to_access_object(CUSTOMERS_BUCKET, CUSTOMERS_DP_FOLDER, file_name, "image/jpeg")
         
+def __does_this_employee_offer_this_service(employee, service):
+        return (employee.is_photographer and service == "photography") or \
+       (employee.is_videographer and service == "videography") or \
+       (employee.is_drone_photographer and service == "drone_photography") or \
+       (employee.is_photo_editor and service == "photo_editing") or \
+       (employee.is_video_editor and service == "video_editing")
+

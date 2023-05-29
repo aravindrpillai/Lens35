@@ -71,7 +71,9 @@ def index(request):
                 "event_start_time" : booking.event_start_time,
                 "event_duration" : booking.event_duration,
                 "services": list(services),
-                "distance" : "{} Km".format(round(distance,1))
+                "distance" : "{} Km".format(round(distance,1)),
+                "customer_name" : booking.customer.full_name,
+                "customer_contact" : booking.customer.mobile_number,
             })
             done_booking_id.append(booking.booking_id)
 
