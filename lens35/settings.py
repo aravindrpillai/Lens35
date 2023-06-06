@@ -119,7 +119,7 @@ LOGGING = {
         },
         'error_file': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': 'C:/lens35/tmp/error.log',
+            'filename': '/tmp/error.log',
             'when': 'midnight',
             'backupCount': 7,
             'level': 'ERROR',
@@ -127,7 +127,7 @@ LOGGING = {
         },
         'debug_file': {
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': 'C:/lens35/tmp/error_and_debug.log',
+            'filename': '/tmp/error_and_debug.log',
             'when': 'midnight',
             'backupCount': 7,
             'level': 'DEBUG',
