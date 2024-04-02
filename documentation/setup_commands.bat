@@ -1,9 +1,9 @@
-python.exe -m pip install --upgrade pip
-python -m pip install django
-pip install django-cors-headers
-pip install djangorestframework
-pip install psycopg2-binary
-pip install boto3
-pip install googlemaps
-pip install geopy
-pip install cryptography
+python3 -m pip install --upgrade pip
+python3 -m pip install django
+pip3 install django-cors-headers
+pip3 install djangorestframework
+pip3 install psycopg2-binary
+pip3 install boto3
+pip3 install googlemaps
+pip3 install geopy
+pip3 install cryptography
