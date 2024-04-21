@@ -74,3 +74,28 @@ def create_service_invoice_item(service, cost_category):
     service_invoice_item.cost_category = cost_category
     service_invoice_item.description = get_description()
     service_invoice_item.save()
+
+
+# def __handle_charges(service, booking, is_delete):
+#     if(is_delete and service.employee == None):
+#         #cancellation charge is added only for assigned services.
+#         return
+    
+#     charge = 0
+#     match service.service:
+#         case "photography"  : charge = PHOTOGRAPHER_RATE_PER_HOUR * booking.event_duration
+#         case "videography"  : charge = VIDEOGRAPHER_RATE_PER_HOUR * booking.event_duration
+#         case "drone"        : charge = DRONE_RATE_PER_HOUR * booking.event_duration
+#         case __ : raise Exception("Failed to rate the service. invalid service code")
+
+#     service_invoice_item = ServiceInvoiceItems()
+#     service_invoice_item.invoice_item_id = uuid.uuid4()
+#     service_invoice_item.service = service
+#     service_invoice_item.cost = CANCELLATION_CHARGE if is_delete else charge
+#     service_invoice_item.cost_category = "cancellation_charge" if is_delete else "booking_cost"
+#     if(is_delete):
+#          desc = "Cancellation charge for service {}. (Rs.{})".format(service.service.capitalize(), CANCELLATION_CHARGE)
+#     else:
+#         desc = "New Service charge for {}. ({}Hrs x Rs.{} = {})".format(service.service.capitalize(), booking.event_duration, PHOTOGRAPHER_RATE_PER_HOUR, charge)
+#     service_invoice_item.description = desc
+#     service_invoice_item.save()

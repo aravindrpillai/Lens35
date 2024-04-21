@@ -33,7 +33,8 @@ def fetch_services(booking_id, customer_id):
             "service_id" : service.service_id,
             "created_time" : str(service.created_time),
             "employee" : employee,
-            "closed" : service.closed
+            "closed" : service.closed,
+            "review" : service.review
         })
     return response
 

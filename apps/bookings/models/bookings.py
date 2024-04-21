@@ -22,6 +22,10 @@ class Bookings(models.Model):
 
     lifecycle = models.JSONField(null=True)
     customer = models.ForeignKey(Customers, null=False, on_delete=models.CASCADE)
+
+    #this flag will be turned to true, once the customer finalises the booking and the payment is done
+    #bookings will be avilable to employees only when the published flag is true 
+    published = models.BooleanField(default=False)
     
     class Meta:
         db_table = "bookings"

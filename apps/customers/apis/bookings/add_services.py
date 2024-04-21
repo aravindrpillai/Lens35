@@ -1,5 +1,7 @@
-from apps.customers.helper import create_lifecycle_event, append_with_previous_lifecycle, create_service_invoice_item
+from lens35.constanst import PHOTOGRAPHER_RATE_PER_HOUR, VIDEOGRAPHER_RATE_PER_HOUR, DRONE_RATE_PER_HOUR
+from apps.bookings.models.service_invoice_items import ServiceInvoiceItems
 from apps.customers.apis.bookings.fetch_services import fetch_services
+from apps.customers.helper import create_lifecycle_event
 from apps.bookings.models.bookings import Bookings
 from apps.bookings.models.services import Services
 from rest_framework.decorators import api_view
@@ -9,6 +11,7 @@ from util.logger import logger
 import traceback
 import uuid
 
+
 @api_view(['POST'])
 def index(request):
     try:
@@ -16,93 +19,64 @@ def index(request):
         customer_id = request.headers.get("Identifier")   
         booking_id = data.get("booking_id",None)
         booking = Bookings.objects.get(booking_id = booking_id)
+        if(booking.published):
+            logger.error('This service cannot be used for bookings that are published: BookingID {}'.format(booking_id))
+            return build_response(400, "This service cannot be used for bookings that are published", None)
+
+        photographer = data.get("photography", False)
+        videographer = data.get("videography", False)
+        drone = data.get("drone", False)
+
+        #flush all prior services
+        Services.objects.filter(booking = booking).delete()
         
-        photographer_count = data.get("photography", 0)
-        videographer_count = data.get("videography", 0)
-        drone_photographer_count = data.get("drone_photography", 0)
-        photo_editor_count = data.get("photo_editing", 0)
-        video_editor_count = data.get("video_editing", 0)
-
-        if(photo_editor_count > 1 or video_editor_count > 1):
-            raise Exception("Photo/Video Editors cannot be more than 1")
-        else:
-            if(photo_editor_count > 0 and Services.objects.filter(booking = booking, service="photo_editor").exclude(Q(retired=True) | Q(closed=True)).exists()):
-                photo_editor_count = 0
-                logger.debug("Photo Editor already exists in this booking. {}".format(booking_id))
-            if(video_editor_count > 0 and Services.objects.filter(booking = booking, service="video_editor").exclude(Q(retired=True) | Q(closed=True)).exists()):
-                video_editor_count = 0
-                logger.debug("Photo Editor already exists in this booking. {}".format(booking_id))
+        if(photographer):
+            __handle_service(booking, "photography")
+        if(videographer):
+            __handle_service(booking, "videography")
+        if(drone):
+            __handle_service(booking, "drone")
         
-        if(photographer_count != None and photographer_count != ""):
-            __create_service(booking, "photography", photographer_count)
-           
-        if(videographer_count != None and videographer_count != ""):
-            __create_service(booking, "videography", videographer_count)
-           
-        if(drone_photographer_count != None and drone_photographer_count != ""):
-            __create_service(booking, "drone_photography", drone_photographer_count)
-           
-        if(photo_editor_count != None and photo_editor_count != ""):
-            __create_service(booking, "photo_editing", photo_editor_count)
-           
-        if(video_editor_count != None and video_editor_count != ""):
-            __create_service(booking, "video_editing", photo_editor_count)
-
-        if(photographer_count > 0 or videographer_count > 0 or drone_photographer_count > 0 or photo_editor_count > 0 or video_editor_count > 0):
-            life_cycle_event = create_lifecycle_event("Service Added - Photographer : {}, Videographer : {}, Drone Photographer : {}, Photo Editor : {}, Video Editor : {}, ".format(photographer_count, videographer_count, drone_photographer_count, photo_editor_count, video_editor_count))
-            booking.lifecycle = append_with_previous_lifecycle(booking.lifecycle, life_cycle_event)
-            booking.save()
-
         return build_response(202, "Success", fetch_services(booking_id, customer_id))
     except Exception as e_0:
-        logger.error('Failed to add new services to booking : {}\n{}'.format(booking_id, traceback.format_exc()))
+        logger.error('Failed to add/update services to booking : {}\n{}'.format(booking_id, traceback.format_exc()))
         return build_response(400, str(e_0))
 
     
-def __create_service(booking, service_type, count_in_request):
-    existing_services = Services.objects.filter(booking = booking, service=service_type).exclude(Q(retired=True) | Q(closed=True))
-    existing_services_count = existing_services.count()
-    new_count = count_in_request - existing_services_count
-    #If new_count = 0, means there is no update on this service 
-    if(new_count == 0):
-        return
-    
-    #If new_count is < 0, means the request came in is to remove the services.
-    if (new_count < 0):
-        delete_flag = (new_count*-1)
-        
-        #First remove the services that ARE NOT ACCEPTED by the employee
-        open_bookings = Services.objects.filter(booking = booking, service=service_type, employee=None).exclude(Q(retired=True) | Q(closed=True))
-        for service in open_bookings:
-            if(delete_flag < 1):
-                break
-            #We dont need to retire services that are not tagged to an employee - hence deleting it completely
-            service.delete()
-            delete_flag -= 1
+def __handle_service(booking, service_name):
+    try:
+        service = Services()
+        service.service_id = uuid.uuid4()
+        service.booking = booking
+        service.service = service_name
+        service.lifecycle = [create_lifecycle_event("Created new service: {}".format(service_name))]
+        service.save()
+        logger.info('Add {} service to booking : {}'.format(service_name, booking.booking_id))
+        __handle_charges(booking, service)
+    except Exception as e_0:
+        logger.error('Failed to add {} service to booking : {}\n{}'.format(service_name, booking.booking_id, traceback.format_exc()))
+        raise e_0
 
-        #Then remove the services that ARE ACCEPTED by the employee
-        if(delete_flag < 1):
-            return
-        accepted_bookings = Services.objects.filter(booking = booking, service=service_type).exclude(employee=None).exclude(Q(retired=True) | Q(closed=True))
-        for service in accepted_bookings:
-            if(delete_flag < 1):
-                break
-            service.retired = True
-            service.lifecycle = [create_lifecycle_event("Removed {}".format(service_type))]
-            create_service_invoice_item(service, "cancellation")
-            delete_flag -= 1
-            service.save()
+
+def __handle_charges(booking, service):
+    service_charge = 0
+    event_duration = booking.event_duration
+    match service.service:
+        case "photography" : 
+            service_charge = PHOTOGRAPHER_RATE_PER_HOUR             
+        case "videography" : 
+            service_charge = VIDEOGRAPHER_RATE_PER_HOUR
+        case "drone" : 
+            service_charge = DRONE_RATE_PER_HOUR
+        case __ : raise Exception("Failed to rate the service. invalid service code")
+
+    service_invoice_item = ServiceInvoiceItems()
+    service_invoice_item.invoice_item_id = uuid.uuid4()
+    service_invoice_item.service = service
+    service_invoice_item.cost = (event_duration * service_charge)
+    service_invoice_item.cost_category = "booking_cost"
+    desc = "New Service charge for {}. ({}Hrs x Rs.{} = {})".format(service.service.capitalize(), event_duration, service_charge, event_duration*service_charge)
+    service_invoice_item.description = desc
+    service_invoice_item.save()
+    logger.info('Service charge added to service {} on booking {}'.format(service.service, booking.booking_id))
         
-    else:
-        for i in range(0, new_count):
-            service = Services()
-            service.service_id = uuid.uuid4()
-            service.booking = booking
-            service.service = service_type
-            service.lifecycle = [create_lifecycle_event("Created {}".format(service_type))]
-            service.save()
-            try:
-                create_service_invoice_item(service, "booking_cost")
-            except Exception as e_0:
-                service.delete()
-                raise e_0

@@ -1,0 +1,52 @@
+Data : 
+    booking_id
+    created_time
+
+    event
+    event_description
+    event_date
+    event_start_time
+    event_duration
+    event_postal_code
+    event_city
+    event_address
+    event_latitude
+    event_longitude
+    
+    photography
+    videography
+    drone
+    
+    lifecycle
+    customer
+    published
+
+
+Services:
+    service_id
+    booking
+    created_time
+    service (choices: SERVICES)
+    employee = (FK : Employees)
+    lifecycle
+    closed
+    retired
+
+# 1. If Booking ID is not passed, this request will be considered as a new booking and all available info will be saved and a new booking ID will be returned.
+# 2. If booking ID is passed along with the data,then that request will be considered as an Update
+# 3. Any kind of modification is possible untill "published flag is false" (published will be set to true once the payment is done)
+# 4. Once the published flag is true, for furhter updates, the api looks for any services that are committed by the photographer.
+#       a. If none of the services are commiiteed to a photographer, then the API simply save the update.
+#           Note - Call InvoiceAPI once this is done to see any changes in charges.
+#       b. If any of the service is committed - see action that happens for each field update
+#          [event, event_description, event_date, event_start_time, event_duration, event_postal_code, event_city, event_address]
+#          Set "Service.review" to true
+#
+#           [photography, videography, drone] 
+#           any of this to false, set Service.retired to true 
+#           if any of this is set to true (newly added service) - Create a new service as usual
+#           Note- In both the above cases, charges will be taken care by InvoiceAPI.                        
+
+
+Validations:
+Bookings must not be allowed to modify on or after the 12 hours prior to the event date.

@@ -10,6 +10,9 @@ SMS_RESEND_TIME_LIMIT_IN_MINUTES = 5              # Timelimit to resend OTP SMS 
 SMS_OTP_LIMIT_PER_SESSION = 3                      # Maximum no of OTP SMS to be sent in 10 minutes 
 TOKEN_EXPIRY_TIME_IN_MINUTES = 10                  # Token validity (if not registered as KEEP_ACTIVE=true)
 
+#Booking cannot be added or modified if CurrentDateTime - BookingDateTime < this duration  
+BOOKING_BUFFER = 12 #in hours
+
 #EMPLOYEE BUCKET DETAILS
 EMPLOYEES_BUCKET = "lens35-employees-001"
 EMPLOYEES_DP_FOLDER = "dp"
@@ -49,16 +52,31 @@ EVENTS = (
 )
 
 
+#Use the below variables for services in code
+PHOTOGRAPHY = "photography"
+VIDEOGRAPHY = "videography"
+DRONE = "drone"
+PHOTO_EDITING = "photo_editing"
+VIDEO_EDITING = "video_editing"
+
+#Choice for table Services.service
 SERVICES = (
-    ("photography", "photography"),
-    ("videography", "videography"),
-    ("drone_photography", "drone_photography"),
-    ("photo_editing", "photo_editing"), 
-    ("video_editing", "video_editing")
+    (PHOTOGRAPHY, PHOTOGRAPHY),
+    (VIDEOGRAPHY, VIDEOGRAPHY),
+    (DRONE, DRONE),
+    (PHOTO_EDITING, PHOTO_EDITING), 
+    (VIDEO_EDITING, VIDEO_EDITING)
 )
 
+
+#use the below for cost categories in code
+BOOKING_COST = "booking_cost"
+CANCELLATION_CHARGE = "cancellation_charge"
+DISCOUNT = "discount"
+
+#Choice for Cost categories
 COST_CATEGORIES = (
-    ("booking_cost", "booking_cost"),
-    ("cancellation_charge", "cancellation_charge"),
-    ("discount", "discount")
+    (BOOKING_COST, BOOKING_COST),
+    (CANCELLATION_CHARGE, CANCELLATION_CHARGE),
+    (DISCOUNT, DISCOUNT)
 )
