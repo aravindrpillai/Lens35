@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ec944ee2-e18a-46fb-b163-ed7640aba15c",
+		"_postman_id": "2fe9ad4e-6301-4d1d-ace7-0177219777fe",
 		"name": "Lens-35",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "7496065"
@@ -622,7 +622,8 @@
 											"});\r",
 											""
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -1969,7 +1970,8 @@
 											"    console.log(\"booking_id stored to global session: \", booking_id);\r",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -1994,7 +1996,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"booking_id\": null,\r\n    \"event\": \"kids\",\r\n    \"event_description\": \"Kids Shoot\",\r\n    \"event_date\": \"2023-03-23\",\r\n    \"event_start_time\": \"12:30\",\r\n    \"event_duration\": 3,\r\n    \"event_postal_code\": \"691303\",\r\n    \"event_city\": \"Kakkotumoola\",\r\n    \"event_address\": \"Kakkotumoola House\"\r\n}",
+									"raw": "{\r\n    \"booking_id\": \"d61883de-ddc0-4f0c-9249-1474de6ca7ef\",\r\n    \"event\": \"kids\",\r\n    \"event_description\": \"Kids Shoot\",\r\n    \"event_date\": \"2024-05-24\",\r\n    \"event_start_time\": \"12:30\",\r\n    \"event_duration\": 4,\r\n    \"event_postal_code\": \"691303\",\r\n    \"event_city\": \"Kakkotumoola\",\r\n    \"event_address\": \"Kakkotumoola House\",\r\n    \"photography\": true,\r\n    \"videography\": false,\r\n    \"drone\": false\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2422,7 +2424,7 @@
 	"variable": [
 		{
 			"key": "domain",
-			"value": "http://localhost:8888",
+			"value": "http://127.0.0.1:8080",
 			"type": "string"
 		}
 	]
